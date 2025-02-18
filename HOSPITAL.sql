@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS clinica;
+ CREATE DATABASE IF NOT EXISTS clinica;
 USE clinica;
 
 
@@ -9,24 +9,12 @@ apellidoPaterno varchar(25) not null,
 apellidoMaterno varchar(25) null,
 fechaNacimiento DATE not null,
 correoElectronico varchar(50) unique,
-contrasenia varchar (225) not null
-);
-
-CREATE TABLE telefonos_pacientes(
-idTelefono int auto_increment primary key,
-telefono varchar(15),
-idPaciente int,
-foreign key(idPaciente) references paciente(idPaciente)
-);
-
-CREATE TABLE direcciones_pacientes(
-idDireccion int auto_increment primary key,
+contrasenia varchar (225) not null,
+telefono varchar(10) not null,
 calle varchar (50) null,
 colonia varchar (50) null,
 numero varchar(7) null,
-idPaciente int,
-foreign key (idPaciente) references paciente(idPaciente)
-);
+);   
 
 
 CREATE TABLE medico(
@@ -35,7 +23,7 @@ nombre varchar(50) not null,
 apellidoPaterno varchar(50) not null,
 apellidoMaterno varchar(50) null,
 especialidad varchar(50) not null,
-cedulaProfesional varchar(50) not null,
+cedulaProfesional varchar(50) not null unique,
 estado ENUM('ACTIVO', 'INACTIVO') DEFAULT 'ACTIVO',
 contrasenia varchar(225) not null
 -- horario varchar
@@ -53,25 +41,18 @@ foreign key(idMedico) references medico(idMedico)
 
 CREATE TABLE consulta(
 idConsulta int auto_increment primary key,
-folio varchar(255) not null
--- idPaciente
--- idMedico
+fecha_consulta datetime,
+tratamiento varchar(200),
+diagnostico varchar(200)
 );
 
 CREATE TABLE citaMedica(
 idCita int auto_increment primary key,
 fechaHora datetime,
-estado enum('ACTIVA','FINALIZADA','PENDIENTE') default 'ACTIVA'
+estado enum('ACTIVA','FINALIZADA','PENDIENTE') default 'ACTIVA',
+folio varchar(8),
+tipo varchar(30) 
 );
-
-CREATE TABLE historial_medico(
-idHistorial int auto_increment primary key,
-diagnostico varchar(255) not null,
-tratamiento varchar(255) null,
-fechaConsulta DATE not null
--- idConsulta
-);
-
 
 -- trigger para insertar al historial en caso de auditoria
 DELIMITER $$
