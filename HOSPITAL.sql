@@ -13,7 +13,7 @@ contrasenia varchar (225) not null,
 telefono varchar(10) not null,
 calle varchar (50) null,
 colonia varchar (50) null,
-numero varchar(7) null,
+numero varchar(7) null
 );   
 
 
