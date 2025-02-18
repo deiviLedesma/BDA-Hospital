@@ -1,8 +1,8 @@
- CREATE DATABASE IF NOT EXISTS clinica;
+CREATE DATABASE IF NOT EXISTS clinica;
 USE clinica;
 
 
-CREATE TABLE paciente (
+CREATE TABLE pacientes (
 idPaciente int auto_increment primary key,
 nombre varchar(50) not null,
 apellidoPaterno varchar(25) not null,
@@ -17,13 +17,13 @@ numero varchar(7) null
 );   
 
 
-CREATE TABLE medico(
-idMedico int auto_increment primary key,
+CREATE TABLE medicos(
+idMedico int auto_increment primary key,   
 nombre varchar(50) not null,
 apellidoPaterno varchar(50) not null,
 apellidoMaterno varchar(50) null,
 especialidad varchar(50) not null,
-cedulaProfesional varchar(50) not null unique,
+cedulaProfesional varchar(50) not null unique, 
 estado ENUM('ACTIVO', 'INACTIVO') DEFAULT 'ACTIVO',
 contrasenia varchar(225) not null
 -- horario varchar
@@ -36,22 +36,29 @@ diaSemana DATE,
 horaInicio datetime,
 horaFin datetime,
 idMedico int,
-foreign key(idMedico) references medico(idMedico)
+foreign key(idMedico) references medicos (idMedico)
 );
 
-CREATE TABLE consulta(
-idConsulta int auto_increment primary key,
-fecha_consulta datetime,
-tratamiento varchar(200),
-diagnostico varchar(200)
-);
 
-CREATE TABLE citaMedica(
+CREATE TABLE citasMedicas(
 idCita int auto_increment primary key,
 fechaHora datetime,
 estado enum('ACTIVA','FINALIZADA','PENDIENTE') default 'ACTIVA',
 folio varchar(8),
-tipo varchar(30) 
+tipo varchar(30),
+idMedico int,
+idPaciente int,
+foreign key(idMedico) references medicos(idMedico),
+foreign key(idPaciente) references pacientes(idPaciente)
+);
+
+CREATE TABLE consultas(
+idConsulta int auto_increment primary key,
+fecha_consulta datetime,
+tratamiento varchar(200),
+diagnostico varchar(200),
+idCitaMedica int,
+foreign key(idCitaMedica) references citasMedicas(idCita)
 );
 
 -- trigger para insertar al historial en caso de auditoria
