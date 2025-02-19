@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,5 +64,87 @@ public class PacienteDAO implements IPacienteDAO {
             throw new PersistenciaException("la creacion del paciente fallo no se inserto ninguna fila");
         }
     }
+
+    @Override
+    public List<Paciente> buscarPacientePorNombre(String nombre) throws PersistenciaException {
+        List<Paciente> pacientes = new ArrayList<>();
+        String consultaSQL = "select * from pacientes where nombre =  ?";
+        
+        try (Connection con = this.conexion.crearConexion();
+                PreparedStatement ps = con.prepareStatement(consultaSQL)) {
+                ps.setString(1, nombre);
+                
+                try(ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        Paciente paciente = new Paciente(
+                    rs.getInt("idPaciente"),
+                    rs.getString("nombre"),
+                    rs.getString("apellidoPaterno"),
+                    rs.getString("apellidoMaterno"),
+                    rs.getDate("fechaNacimiento").toLocalDate(), // Convertimos a LocalDate
+                    rs.getString("correoElectronico"),
+                    rs.getString("contrasenia"),
+                    rs.getString("telefono"),
+                    rs.getString("calle"),
+                    rs.getString("colonia"),
+                    rs.getString("numero")
+                );
+                pacientes.add(paciente);
+                    }
+                }
+            
+        }catch (SQLException e) {
+        LOG.log(Level.SEVERE, "Error al buscar pacientes por nombre", e);
+        throw new PersistenciaException("Error al buscar pacientes por nombre", e);
+    }
+        return pacientes;
+    }
+
+    @Override
+    public List<Paciente> MostrarTodosLosPacientes() {
+     List<Paciente> pacientes = new ArrayList<>();
+        String consultaSQL = "select * from pacientes ";
+        
+        try (Connection con = this.conexion.crearConexion();
+                PreparedStatement ps = con.prepareStatement(consultaSQL)) {
+                
+                try(ResultSet rs = ps.executeQuery()){
+                    while(rs.next()){
+                        Paciente paciente = new Paciente(
+                    rs.getInt("idPaciente"),
+                    rs.getString("nombre"),
+                    rs.getString("apellidoPaterno"),
+                    rs.getString("apellidoMaterno"),
+                    rs.getDate("fechaNacimiento").toLocalDate(), // Convertimos a LocalDate
+                    rs.getString("correoElectronico"),
+                    rs.getString("contrasenia"),
+                    rs.getString("telefono"),
+                    rs.getString("calle"),
+                    rs.getString("colonia"),
+                    rs.getString("numero")
+                );
+                pacientes.add(paciente);
+                    }
+                }
+            
+        }catch (SQLException e) {
+        LOG.log(Level.SEVERE, "Error al buscar pacientes por nombre", e);
+         try {
+             throw new PersistenciaException("Error al buscar pacientes por nombre", e);
+         } catch (PersistenciaException ex) {
+             Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }
+    }   catch (PersistenciaException ex) {
+            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pacientes;
+    }
+    
+    
+
+   
+    
+    
+    
     
 }

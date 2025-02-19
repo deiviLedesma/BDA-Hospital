@@ -4,6 +4,8 @@
  */
 package Persistencia;
 
+import java.util.List;
+
 /**
  *
  * @author Ramón Zamudio
@@ -12,4 +14,7 @@ public interface IPacienteDAO {
 
     public Paciente agregarPaciente(Paciente paciente)throws PersistenciaException;
     
+    public List<Paciente> buscarPacientePorNombre(String nombre)throws PersistenciaException;
+    
+    public List<Paciente> MostrarTodosLosPacientes();
 }

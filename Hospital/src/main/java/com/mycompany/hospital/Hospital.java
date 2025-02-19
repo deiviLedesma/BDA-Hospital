@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 /**
  *
@@ -37,6 +38,7 @@ public class Hospital {
             e.printStackTrace();
         }
         **/
+        /**
         try{
             Paciente paciente1 = new Paciente("ramon", "zamudio", "ayala", LocalDate.of(1995, 6, 15), "ramonsebas5@gmail.com", "ramonsebas1", "6441295639", "orion", "las flores", "1313");
             Paciente pacienteGuardado = pacienteDAO.agregarPaciente(paciente1);
@@ -49,5 +51,13 @@ public class Hospital {
             System.err.println("Error en la al insertar: " + e.getMessage());
             e.printStackTrace();
         }
-    }
+        * */
+        /*
+        List<Paciente> pacientes =pacienteDAO.buscarPacientePorNombre("ramon");
+        System.out.println(pacientes);
+        List<Paciente> pacientes =pacienteDAO.MostrarTodosLosPacientes();
+        System.out.println(pacientes);
+        */
+        
+    }    
 }
