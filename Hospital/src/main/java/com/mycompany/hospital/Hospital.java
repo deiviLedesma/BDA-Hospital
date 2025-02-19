@@ -38,7 +38,7 @@ public class Hospital {
         }
         **/
         try{
-            Paciente paciente1 = new Paciente("ramon", "zamudio", "ayala", LocalDate.now(), "ramonsebas5@gmail.com", "ramonsebas1", "6441295639", "orion", "las flores", "1313");
+            Paciente paciente1 = new Paciente("ramon", "zamudio", "ayala", LocalDate.of(1995, 6, 15), "ramonsebas5@gmail.com", "ramonsebas1", "6441295639", "orion", "las flores", "1313");
             Paciente pacienteGuardado = pacienteDAO.agregarPaciente(paciente1);
             if(pacienteGuardado != null && pacienteGuardado.getIdPaciente()>0){
                 System.out.println("paciente guardado con exito"+pacienteGuardado);

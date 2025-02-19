@@ -28,7 +28,7 @@ public class PacienteDAO implements IPacienteDAO {
 
     @Override
     public Paciente agregarPaciente(Paciente paciente) throws PersistenciaException {
-        String consultaSQL = "insert into pacientes (nombre, apellidoPaterno, apellidoMaterno, correoElectronico, contrasenia, telefono, calle, colonia, numero)values (?,?,?,?,?,?,?,?,?)";
+        String consultaSQL = "insert into pacientes (nombre, apellidoPaterno, apellidoMaterno, correoElectronico, contrasenia, telefono, calle, colonia, numero,fechaNacimiento)values (?,?,?,?,?,?,?,?,?,?)";
         
         try(Connection con = conexion.crearConexion();
                 PreparedStatement ps = con.prepareStatement(consultaSQL, Statement.RETURN_GENERATED_KEYS)){
@@ -41,7 +41,7 @@ public class PacienteDAO implements IPacienteDAO {
             ps.setString(7, paciente.getCalle());
             ps.setString(8, paciente.getColonia());
             ps.setString(9, paciente.getNumero());
-            
+            ps.setDate(10, java.sql.Date.valueOf(paciente.getFechaNacimiento()));
             int filasAfectadas = ps.executeUpdate();
             if(filasAfectadas == 0){
                 LOG.severe("la creacion del paciente fallo no se inserto ninguna fila");
