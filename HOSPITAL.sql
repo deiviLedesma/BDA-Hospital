@@ -10,16 +10,9 @@ fechaNacimiento DATE not null,
 correoElectronico varchar(30) not null unique,
 telefono varchar(15) not null unique,
 contrasenia varchar(125) not null
-);
-
-
-create table direcciones_pacientes(
-idDireccion int auto_increment primary key,
-calle varchar(30) not null,
-colonia varchar(30) not null,
-numero varchar(10) not null,
-idPaciente int not null,
-FOREIGN KEY (idPaciente) REFERENCES pacientes (idPaciente)
+calle varchar(125) not null,
+colonia varchar(125) not null,
+numero varchar(125) not null
 );
 
 
