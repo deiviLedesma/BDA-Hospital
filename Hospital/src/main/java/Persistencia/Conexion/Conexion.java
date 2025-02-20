@@ -20,7 +20,7 @@ public class Conexion implements IConexion{
     
     final String USUARIO = "root";
     final String PASS = "ramonsebas1";
-    final String CADENA_CONEXION = "jdbc:mysql://localhost:3306/clinica";
+    final String CADENA_CONEXION = "jdbc:mysql://localhost:3306/HOSPITAL";
 
     @Override
     public Connection crearConexion() throws PersistenciaException {

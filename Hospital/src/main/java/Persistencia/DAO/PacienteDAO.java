@@ -43,7 +43,7 @@ public class PacienteDAO implements IPacienteDAO {
             
             ps.setString(1, paciente.getNombre());
             ps.setString(2, paciente.getApellidoPaterno());
-            ps.setString(3, paciente.getApellidoPaterno());
+            ps.setString(3, paciente.getApellidoMaterno());
             ps.setString(4, paciente.getCorreoElectronico());
             ps.setString(5, contraseniaHash);
             ps.setString(6, paciente.getTelefono());
