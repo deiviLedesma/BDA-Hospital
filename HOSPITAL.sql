@@ -9,7 +9,7 @@ apellidoMaterno varchar(25) null,
 fechaNacimiento DATE not null,
 correoElectronico varchar(30) not null unique,
 telefono varchar(15) not null unique,
-contrasenia varchar(125) not null
+contrasenia varchar(125) not null,
 calle varchar(125) not null,
 colonia varchar(125) not null,
 numero varchar(125) not null
