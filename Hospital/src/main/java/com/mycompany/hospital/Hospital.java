@@ -4,17 +4,11 @@
 
 package com.mycompany.hospital;
 
-import Persistencia.Conexion;
-import Persistencia.IConexion;
-import Persistencia.Paciente;
-import Persistencia.PacienteDAO;
+import Persistencia.Conexion.Conexion;
+import Persistencia.Conexion.IConexion;
+import Persistencia.DAO.PacienteDAO;
 import Persistencia.PersistenciaException;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 /**
  *
