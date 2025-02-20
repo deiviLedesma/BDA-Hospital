@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -34,11 +35,14 @@ public class PacienteDAO implements IPacienteDAO {
         
         try(Connection con = conexion.crearConexion();
                 PreparedStatement ps = con.prepareStatement(consultaSQL, Statement.RETURN_GENERATED_KEYS)){
+            
+            String contraseniaHash = hashearContrasenia(paciente.getContrasenia());
+            
             ps.setString(1, paciente.getNombre());
             ps.setString(2, paciente.getApellidoPaterno());
             ps.setString(3, paciente.getApellidoPaterno());
             ps.setString(4, paciente.getCorreoElectronico());
-            ps.setString(5, paciente.getContrasenia());
+            ps.setString(5, contraseniaHash);
             ps.setString(6, paciente.getTelefono());
             ps.setString(7, paciente.getCalle());
             ps.setString(8, paciente.getColonia());
@@ -141,7 +145,16 @@ public class PacienteDAO implements IPacienteDAO {
     }
     
     
-
+    //Para encriptar la contrasenia
+    private static String hashearContrasenia(String contrasenia) {
+        return BCrypt.hashpw(contrasenia, BCrypt.gensalt(10));
+    }
+    
+    
+    //Para verificar que la contrasenia ingresada y la hasheada coinciden (usar en el inicio de sesion)
+    private static boolean checarContrasenia(String contrasenia, String contraseniaHasheada) {
+        return BCrypt.checkpw(contrasenia, contraseniaHasheada);
+    }
    
     
     
