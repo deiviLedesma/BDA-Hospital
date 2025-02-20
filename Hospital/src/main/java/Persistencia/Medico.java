@@ -17,6 +17,15 @@ public class Medico {
     private String celudaProfesional;
     private String estado;
     private String contrasenia;
+    
+    
+    
+    /**
+     * constructor vacío
+     */
+    public Medico() {
+    }
+
     /**
      * constructor con parametros
      * @param idMedico

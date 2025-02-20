@@ -25,6 +25,12 @@ public class Paciente {
     private String numero;
 
     /**
+     * constructor vacío
+     */
+    public Paciente() {
+    }
+    
+    /**
      * constructor con todos los atributos
      * @param idPaciente
      * @param nombre 
