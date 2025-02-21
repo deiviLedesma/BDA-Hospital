@@ -91,6 +91,7 @@ public class Hospital {
 //        Paciente p1 = new Paciente("Marcela", "Vidal", "Acosta", LocalDate.of(2005, 10, 31), "marcela@gmail.com", "marcela01", "6441392262", "san pedro", "capistrano", "2915");
 //        PacienteDTONuevo pacienteDTON = new PacienteDTONuevo(p1.getNombre(), p1.getApellidoPaterno(), p1.getApellidoMaterno(), p1.getFechaNacimiento(), p1.getCorreoElectronico(), p1.getTelefono(), p1.getCalle(), p1.getColonia(), p1.getNumero(), p1.getContrasenia());
 //        pacienteBO.agregarPaciente(pacienteDTON);
+
         
 ////      Mostar todos los pacientes a nivel negocio FUNCIONA
 //        System.out.println(pacienteBO.obtenerTodosPacientes());

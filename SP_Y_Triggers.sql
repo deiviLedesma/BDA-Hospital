@@ -4,7 +4,7 @@ CREATE PROCEDURE insertarPaciente(
 	IN p_nombre VARCHAR(25),
     IN p_apellidoPaterno VARCHAR(25),
     IN p_apellidoMaterno VARCHAR(25),
-    IN p_fechaNacimeinto DATE,
+    IN p_fechaNacimiento DATE,
     IN p_correoElectronico VARCHAR(30),
     IN p_telefono VARCHAR(15),
     IN p_contrasenia varchar(125)
@@ -12,7 +12,7 @@ CREATE PROCEDURE insertarPaciente(
 BEGIN
 	INSERT INTO pacientes (nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento,
 						   correoElectronico, telefono, contrasenia)
-			    VALUES (p_nombre, p_apellidoPaterno, p_apellidoMaterno, p_fechaNacimiento,
+			    VALUES (p_nombre, p_apellidoPaterno, p_apellidoMate|rno, p_fechaNacimiento,
 						p_correoElectronico, p_telefono, p_contrasenia);
 END $$
 DELIMITER ;
@@ -82,14 +82,15 @@ BEGIN
         
 -- triggers
         
+        -- de momento solo funciona este trigger
 -- Trigger para auditoría de inserción de pacientes
 DELIMITER $$
 CREATE TRIGGER auditoriaPacientes
 AFTER INSERT ON pacientes
 FOR EACH ROW
-	BEGIN
-		INSERT INTO auditoria(tabla, accion, descripcion, fecha)
-					VALUES('pacientes', 'INSERT', CONCAT('Nuevo paciente registrado: ', NEW.idPaciente), NOW());
+BEGIN
+    INSERT INTO auditoria(tablaAfectada, tipoAccion, descripcion, fechHora, usuarioResponsable)
+    VALUES('pacientes', 'INSERT', CONCAT('Nuevo paciente registrado: ', NEW.idPaciente), NOW(), NEW.idPaciente);
 END $$
 DELIMITER ;
 
