@@ -62,14 +62,15 @@ public class Hospital {
 //        List<Paciente> pacientes =pacienteDAO.MostrarTodosLosPacientes();
 //        System.out.println(pacientes);
         //agregar paciente
-        Paciente paciente1 = new Paciente("soy", "muy", "puto", LocalDate.of(2005, 11, 15), "aaaa", "dddd", "6125487512", "4454", "sdasd", "4545");
+        // el paciente se añade directamente a la tabla de auditoria
+        Paciente paciente1 = new Paciente("David", "Ledesma", "Sanchez", LocalDate.of(2005, 11, 15), "aa", "dd", "12548712", "44", "ssd", "45");
         PacienteDTONuevo pacienteDTON = new PacienteDTONuevo(paciente1.getNombre(), paciente1.getApellidoPaterno(), paciente1.getApellidoMaterno(), paciente1.getFechaNacimiento(), paciente1.getCorreoElectronico(), paciente1.getTelefono(), paciente1.getCalle(), paciente1.getColonia(), paciente1.getNumero(), paciente1.getNumero());
         paciente.agregarPaciente(pacienteDTON);
         //mostar todos
-        System.out.println(paciente.obtenerTodosPacientes());
+      //  System.out.println(paciente.obtenerTodosPacientes());
         
         //mostrar x nombre
-        System.out.println(paciente.obtenerPorNombre("ramon"));
+      //  System.out.println(paciente.obtenerPorNombre("ramon"));
         
         
     }    

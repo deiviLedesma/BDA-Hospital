@@ -19,7 +19,7 @@ public class Conexion implements IConexion{
 
     
     final String USUARIO = "root";
-    final String PASS = "ramonsebas1";
+    final String PASS = "Inunanash1";
     final String CADENA_CONEXION = "jdbc:mysql://localhost:3306/HOSPITAL";
 
     @Override
