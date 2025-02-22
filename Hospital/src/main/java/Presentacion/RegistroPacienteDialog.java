@@ -8,10 +8,16 @@ import Negocio.BO.PacienteBO;
 import Negocio.DTO.PacienteDTONuevo;
 import Negocio.Exception.NegocioException;
 import Negocio.configuracion.DependencyInjector;
+import com.github.lgooddatepicker.components.DatePicker;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -21,12 +27,15 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
     
     private PacienteBO pacienteBO = DependencyInjector.crearPacienteBO();
 
+
     /**
      * Creates new form RegistroPacienteDialog
      */
     public RegistroPacienteDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**

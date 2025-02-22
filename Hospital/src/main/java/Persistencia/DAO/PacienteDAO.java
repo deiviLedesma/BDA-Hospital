@@ -34,7 +34,7 @@ public class PacienteDAO implements IPacienteDAO {
 
     @Override
     public Paciente agregarPaciente(Paciente paciente) throws PersistenciaException {
-        String consultaSQL = "insert into pacientes (nombre, apellidoPaterno, apellidoMaterno, correoElectronico, contrasenia, telefono, calle, colonia, numero,fechaNacimiento)values (?,?,?,?,?,?,?,?,?,?)";
+        String consultaSQL = "{ call insertarPaciente(?,?,?,?,?,?,?,?,?,?) }";
         
         try(Connection con = conexion.crearConexion();
                 PreparedStatement ps = con.prepareStatement(consultaSQL, Statement.RETURN_GENERATED_KEYS)){

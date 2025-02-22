@@ -94,15 +94,17 @@ public class Hospital {
 //        List<Paciente> pacientes =pacienteDAO.buscarPacientePorNombre("ramon");
 //        System.out.println(pacientes);
         
+
 ////      Prueba mostrar todos los pacientes persistencia
 //        List<Paciente> pacientes =pacienteDAO.MostrarTodosLosPacientes();
 //        System.out.println(pacientes);
 
 
+
 ////      Prueba agregar paciente a nivel negocio FUNCIONA
-//        Paciente p1 = new Paciente("Marcela", "Vidal", "Acosta", LocalDate.of(2005, 10, 31), "marcela@gmail.com", "marcela01", "6441392262", "san pedro", "capistrano", "2915");
-//        PacienteDTONuevo pacienteDTON = new PacienteDTONuevo(p1.getNombre(), p1.getApellidoPaterno(), p1.getApellidoMaterno(), p1.getFechaNacimiento(), p1.getCorreoElectronico(), p1.getTelefono(), p1.getCalle(), p1.getColonia(), p1.getNumero(), p1.getContrasenia());
-//        pacienteBO.agregarPaciente(pacienteDTON);
+        Paciente p1 = new Paciente("Marcela", "Vidal", "Acosta", LocalDate.of(2005, 10, 31), "marcea@gmail.com", "arcela01", "644132262", "san pedro", "capistrano", "2915");
+        PacienteDTONuevo pacienteDTON = new PacienteDTONuevo(p1.getNombre(), p1.getApellidoPaterno(), p1.getApellidoMaterno(), p1.getFechaNacimiento(), p1.getCorreoElectronico(), p1.getTelefono(), p1.getCalle(), p1.getColonia(), p1.getNumero(), p1.getContrasenia());
+       pacienteBO.agregarPaciente(pacienteDTON);
 
         
 ////      Mostar todos los pacientes a nivel negocio FUNCIONA
@@ -136,6 +138,7 @@ public class Hospital {
         CitaMedica cita = new CitaMedica(true, LocalDate.of(2025, 02, 26), LocalTime.of(17, 30), 1, 2);
         CitaAgendadaDTO citaAgendadaDTO = new CitaAgendadaDTO(cita.getIdMedico(), cita.getIdPaciente(), cita.getDiaSemana(), cita.getHora());
         citaMedicaBO.agendarCita(citaAgendadaDTO);
+
 
 
         

@@ -7,13 +7,16 @@ CREATE PROCEDURE insertarPaciente(
     IN p_fechaNacimiento DATE,
     IN p_correoElectronico VARCHAR(30),
     IN p_telefono VARCHAR(15),
-    IN p_contrasenia varchar(125)
+    IN p_contrasenia varchar(125),
+    IN p_calle varchar(125),
+	IN p_colonia varchar(125),
+	IN p_numero varchar(125)
 )
 BEGIN
 	INSERT INTO pacientes (nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento,
-						   correoElectronico, telefono, contrasenia)
-			    VALUES (p_nombre, p_apellidoPaterno, p_apellidoMate|rno, p_fechaNacimiento,
-						p_correoElectronico, p_telefono, p_contrasenia);
+						   correoElectronico, telefono, contrasenia, calle, colonia, numero)
+			    VALUES (p_nombre, p_apellidoPaterno, p_apellidoMaterno, p_fechaNacimiento,
+						p_correoElectronico, p_telefono, p_contrasenia, p_calle, p_colonia, p_numero);
 END $$
 DELIMITER ;
 
@@ -82,7 +85,7 @@ BEGIN
         
 -- triggers
         
-        -- de momento solo funciona este trigger
+        
 -- Trigger para auditoría de inserción de pacientes
 DELIMITER $$
 CREATE TRIGGER auditoriaPacientes
@@ -100,7 +103,7 @@ CREATE TRIGGER auditoriaConsultas
 AFTER INSERT ON consulta
 FOR EACH ROW
 BEGIN
-	INSERT INTO auditoria(tabla, accion, descripcion, fecha)
+	INSERT INTO auditoria(tablaAfectada, tipoAccion, descripcion, fechaHora, usuarioResponsable)
 				VALUES('consulta', 'INSERT', CONCAT('Nueva consulta registrada: ', NEW.idConsulta), NOW());
 END $$
 DELIMITER ;
@@ -111,21 +114,24 @@ CREATE TRIGGER auditoriaCitas
 AFTER INSERT ON citaMedica
 FOR EACH ROW
 BEGIN
-			INSERT INTO auditoria(tabla, accion, descripcion, fecha)
+			INSERT INTO auditoria(tablaAfectada, tipoAccion, descripcion, fechaHora, usuarioResponsable)
 						VALUES('citaMedica', 'INSERT', CONCAT('Nueva cita programada: ', NEW.idCita), NOW());
 END $$
 DELIMITER ;
 
+/*
 -- Trigger para auditoría para la inserción de direccionesPacientes
 DELIMITER $$
 CREATE TRIGGER auditoriaDireccionesPacientes
 AFTER INSERT ON direcciones_pacientes
 FOR EACH ROW
 BEGIN
-			INSERT INTO auditoria(tabla, accion, descripcion, fecha)
+			INSERT INTO auditoria(tablaAfectada,tipoAccion, descripcion, fechaHora, usuarioResponasble)
 						VALUES('direcciones_pacientes', 'INSERT', CONCAT('Nueva direccion agregada para el paciente: ', NEW.idPaciente), NOW());
 END $$
 DELIMITER ;
+
+*/
 
 -- Trigger para auditoría para la inserción de Horarios medicos
 DELIMITER $$
@@ -133,7 +139,7 @@ CREATE TRIGGER horarios_medicos
 AFTER INSERT ON horarios_medicos
 FOR EACH ROW
 BEGIN
-			INSERT INTO auditoria(tabla, accion, descripcion, fecha)
+			INSERT INTO auditoria(tablaAfectada, tipoAccion, descripcion, fechaHora, usuarioResponsable)
 						VALUES('horarios_medicos', 'INSERT', CONCAT('Nuevo horarios registrado para el médico: ', NEW.idMedico), NOW());
 END $$
 DELIMITER ;
