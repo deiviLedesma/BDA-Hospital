@@ -8,7 +8,7 @@ package Negocio.DTO;
  *
  * @author SDavidLedesma
  */
-public class MedicoDTO {
+public class MedicoDTOViejo {
     
     private String nombre;
     private String apellidoPaterno;
@@ -16,10 +16,21 @@ public class MedicoDTO {
     private String especialidad;
     private String cedulaProfesional;
     private String estado;
+    private String contrasenia;
 
-    public MedicoDTO() {
+    public MedicoDTOViejo() {
     }
 
+    public MedicoDTOViejo(String nombre, String apellidoPaterno, String apellidoMaterno, String especialidad, String cedulaProfesional, String estado,String contrasenia) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.especialidad = especialidad;
+        this.cedulaProfesional = cedulaProfesional;
+        this.estado = estado;
+        this.contrasenia = contrasenia;
+    }
+    
     public String getNombre() {
         return nombre;
     }
@@ -68,10 +79,19 @@ public class MedicoDTO {
         this.estado = estado;
     }
 
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
     @Override
     public String toString() {
-        return "MedicoDTO{" + "nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", especialidad=" + especialidad + ", cedulaProfesional=" + cedulaProfesional + ", estado=" + estado + '}';
+        return "MedicoDTOViejo{" + "nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", especialidad=" + especialidad + ", cedulaProfesional=" + cedulaProfesional + ", estado=" + estado + ", contrasenia=" + contrasenia + '}';
     }
+
     
     
     
