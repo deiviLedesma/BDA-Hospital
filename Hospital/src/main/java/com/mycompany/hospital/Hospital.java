@@ -4,20 +4,25 @@
 
 package com.mycompany.hospital;
 
+import Negocio.BO.CitaMedicaBO;
 import Negocio.BO.PacienteBO;
+import Negocio.DTO.CitaAgendadaDTO;
 import Negocio.DTO.PacienteDTONuevo;
 import Negocio.DTO.PacienteDTOViejo;
 import Negocio.Exception.NegocioException;
 import Persistencia.Conexion.Conexion;
 import Persistencia.Conexion.IConexion;
+import Persistencia.DAO.CitaMedicaDAO;
 import Persistencia.DAO.MedicoDAO;
 import Persistencia.DAO.PacienteDAO;
+import Persistencia.Entidades.CitaMedica;
 import Persistencia.Entidades.Medico;
 import Persistencia.Entidades.Paciente;
 import Persistencia.PersistenciaException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -41,6 +46,8 @@ public class Hospital {
         PacienteDAO pacienteDAO = new PacienteDAO(conexionBD);
         PacienteBO pacienteBO = new PacienteBO(conexionBD);
         MedicoDAO medicoDAO = new MedicoDAO(conexionBD);
+        CitaMedicaDAO citaMedicaDAO = new CitaMedicaDAO(conexionBD);
+        CitaMedicaBO citaMedicaBO = new CitaMedicaBO(conexionBD);
         
         
 ////      Prueba de encriptación de la contraseña  
@@ -87,9 +94,9 @@ public class Hospital {
 //        List<Paciente> pacientes =pacienteDAO.buscarPacientePorNombre("ramon");
 //        System.out.println(pacientes);
         
-        //Prueba mostrar todos los pacientes persistencia
-        List<Paciente> pacientes =pacienteDAO.MostrarTodosLosPacientes();
-        System.out.println(pacientes);
+////      Prueba mostrar todos los pacientes persistencia
+//        List<Paciente> pacientes =pacienteDAO.MostrarTodosLosPacientes();
+//        System.out.println(pacientes);
 
 
 ////      Prueba agregar paciente a nivel negocio FUNCIONA
@@ -103,12 +110,34 @@ public class Hospital {
       
 ////      Mostrar x nombre a nivel negocio FUNCIONA
 //        System.out.println(pacienteBO.obtenerPorNombre("ramon"));
-        List<Medico> medicos =medicoDAO.consultarTodosMedicos();
-        System.out.println(medicos);
-        List<Medico> medicosEspeciales =medicoDAO.consultarPorEspecialidad("Cardiología");
-        System.out.println(medicosEspeciales);
-        
-        medicoDAO.eliminarMedico(1);
+//        List<Medico> medicos =medicoDAO.consultarTodosMedicos();
+//        System.out.println(medicos);
+//        List<Medico> medicosEspeciales =medicoDAO.consultarPorEspecialidad("Cardiología");
+//        System.out.println(medicosEspeciales);
+//        
+//        medicoDAO.eliminarMedico(1);
+
+
+////      Agendar Cita a nivel persistencia FUNCIONA
+//        try{
+//            CitaMedica cita1 = new CitaMedica(false, LocalDate.of(2025, 02, 27),LocalTime.of(11, 30), 1, 5);
+//            CitaMedica citaAgendada = citaMedicaDAO.agendarCita(cita1);
+//            if(citaAgendada != null && citaAgendada.getIdCita()>0){
+//                System.out.println("Cita agendada con exito "+citaAgendada);
+//            }else{
+//                System.out.println("No se pudo agendar la cita");
+//            }
+//        }catch(PersistenciaException e){
+//            System.err.println("Error en la al insertar: " + e.getMessage());
+//            e.printStackTrace();
+//        }
+
+//        Agendar Cita a nivel negocio
+        CitaMedica cita = new CitaMedica(true, LocalDate.of(2025, 02, 26), LocalTime.of(17, 30), 1, 2);
+        CitaAgendadaDTO citaAgendadaDTO = new CitaAgendadaDTO(cita.getIdMedico(), cita.getIdPaciente(), cita.getDiaSemana(), cita.getHora());
+        citaMedicaBO.agendarCita(citaAgendadaDTO);
+
+
         
     }    
 }
