@@ -59,20 +59,20 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        txtContraseniaP = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         datePickerFechaNacimiento = new com.github.lgooddatepicker.components.DatePicker();
+        pwContrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Fecha de Nacimiento");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Apellido Materno");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Correo Electrónico");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         txtApellidoMaternoP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,17 +80,17 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Teléfono");
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setText("Direccion");
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel9.setText("Calle");
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel10.setText("Colonia");
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
 
@@ -117,28 +117,28 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
                 .addGap(31, 31, 31))
         );
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel11.setText("Numero");
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Nombre");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel2.setText("Apellido Paterno");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel12.setText("Contraseña");
-
-        txtContraseniaP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtContraseniaPActionPerformed(evt);
-            }
-        });
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         jButton1.setText("Continuar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        pwContrasenia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pwContraseniaActionPerformed(evt);
             }
         });
 
@@ -148,22 +148,18 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(131, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel12)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8)
@@ -176,8 +172,8 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
                     .addComponent(txtTelefonoP)
                     .addComponent(datePickerFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNumeroP)
-                    .addComponent(txtContraseniaP))
-                .addContainerGap(91, Short.MAX_VALUE))
+                    .addComponent(pwContrasenia))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,7 +228,7 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(txtContraseniaP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pwContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(76, Short.MAX_VALUE))
@@ -241,10 +237,6 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtContraseniaPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtContraseniaPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtContraseniaPActionPerformed
-
     private void txtApellidoMaternoPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidoMaternoPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoMaternoPActionPerformed
@@ -252,6 +244,10 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        agregarPaciente();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void pwContraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pwContraseniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pwContraseniaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,11 +307,11 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField pwContrasenia;
     private javax.swing.JTextField txtApellidoMaternoP;
     private javax.swing.JTextField txtApellidoPaternoP;
     private javax.swing.JTextField txtCalleP;
     private javax.swing.JTextField txtColoniaP;
-    private javax.swing.JTextField txtContraseniaP;
     private javax.swing.JTextField txtCorreoElecctronicoP;
     private javax.swing.JTextField txtNombreP;
     private javax.swing.JTextField txtNumeroP;
@@ -334,7 +330,9 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
             String calle = txtCalleP.getText();
             String colonia = txtColoniaP.getText();
             String numero = txtNumeroP.getText();
-            String contrasenia = txtContraseniaP.getText();
+            char[] contraseniaChar = pwContrasenia.getPassword();
+            
+            String contrasenia = new String(contraseniaChar);
 
             PacienteDTONuevo paciente = new PacienteDTONuevo(nombre, apellidoP, apellidoM, fechaNacimiento, correo, telefono, calle, colonia, numero, contrasenia);
             boolean exito = pacienteBO.agregarPaciente(paciente);
@@ -367,6 +365,6 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
         txtCalleP.setText("");
         txtColoniaP.setText("");
         txtNumeroP.setText("");
-        txtContraseniaP.setText("");
+        pwContrasenia.setText("");
     }
 }
