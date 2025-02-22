@@ -40,14 +40,16 @@ public class Hospital {
         PacienteBO pacienteBO = new PacienteBO(conexionBD);
         
         
-////      Prueba de encriptación de la contraseña  
-//        String contra = "holiwis";
+//      Prueba de encriptación de la contraseña  
+        String contra = "Doctor2";
 //        
 //        String hashedPW = hashearContrasenia(contra);
 //        
-//        Boolean checar = checarContrasenia(contra, hashedPW);
+//        System.out.println(hashedPW);
 //        
-//        System.out.println(checar);    
+        Boolean checar = checarContrasenia(contra, "$2a$10$AeJyw9wxwjDqUvslg19x6.CAQRCv702p5XBl0kIdMLnd7vs9VtbRW");
+        
+        System.out.println(checar);    
         
         
 ////      Prueba de conexion  FUNCIONA
