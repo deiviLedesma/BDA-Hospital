@@ -34,7 +34,7 @@ public class PacienteDAO implements IPacienteDAO {
 
     @Override
     public Paciente agregarPaciente(Paciente paciente) throws PersistenciaException {
-        String consultaSQL = "{ call insertarPaciente(?,?,?,?,?,?,?,?,?,?) }";
+        String consultaSQL = "INSERT INTO pacientes(nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, correoElectronico, telefono, contrasenia, calle, colonia, numero) VALUES(?,?,?,?,?,?,?,?,?,?)";
         
         try(Connection con = conexion.crearConexion();
                 PreparedStatement ps = con.prepareStatement(consultaSQL, Statement.RETURN_GENERATED_KEYS)){
@@ -44,13 +44,14 @@ public class PacienteDAO implements IPacienteDAO {
             ps.setString(1, paciente.getNombre());
             ps.setString(2, paciente.getApellidoPaterno());
             ps.setString(3, paciente.getApellidoMaterno());
-            ps.setString(4, paciente.getCorreoElectronico());
-            ps.setString(5, contraseniaHash);
+            ps.setDate(4, java.sql.Date.valueOf(paciente.getFechaNacimiento()));
+            ps.setString(5, paciente.getCorreoElectronico());
             ps.setString(6, paciente.getTelefono());
-            ps.setString(7, paciente.getCalle());
-            ps.setString(8, paciente.getColonia());
-            ps.setString(9, paciente.getNumero());
-            ps.setDate(10, java.sql.Date.valueOf(paciente.getFechaNacimiento()));
+            ps.setString(7, contraseniaHash);
+            ps.setString(8, paciente.getCalle());
+            ps.setString(9, paciente.getColonia());
+            ps.setString(10, paciente.getNumero());
+            
             int filasAfectadas = ps.executeUpdate();
             if(filasAfectadas == 0){
                 LOG.severe("la creacion del paciente fallo no se inserto ninguna fila");

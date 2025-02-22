@@ -101,10 +101,10 @@ public class Hospital {
 
 
 
-////      Prueba agregar paciente a nivel negocio FUNCIONA
-        Paciente p1 = new Paciente("Marcela", "Vidal", "Acosta", LocalDate.of(2005, 10, 31), "marcea@gmail.com", "arcela01", "644132262", "san pedro", "capistrano", "2915");
+//      Prueba agregar paciente a nivel negocio FUNCIONA
+        Paciente p1 = new Paciente("Marcela", "Vidal", "Acosta", LocalDate.of(2005, 10, 31), "marcea@gmail.com", "Marcela01", "644132262", "san pedro", "capistrano", "2915");
         PacienteDTONuevo pacienteDTON = new PacienteDTONuevo(p1.getNombre(), p1.getApellidoPaterno(), p1.getApellidoMaterno(), p1.getFechaNacimiento(), p1.getCorreoElectronico(), p1.getTelefono(), p1.getCalle(), p1.getColonia(), p1.getNumero(), p1.getContrasenia());
-       pacienteBO.agregarPaciente(pacienteDTON);
+        pacienteBO.agregarPaciente(pacienteDTON);
 
         
 ////      Mostar todos los pacientes a nivel negocio FUNCIONA
@@ -122,7 +122,7 @@ public class Hospital {
 
 ////      Agendar Cita a nivel persistencia FUNCIONA
 //        try{
-//            CitaMedica cita1 = new CitaMedica(false, LocalDate.of(2025, 02, 27),LocalTime.of(11, 30), 1, 5);
+//            CitaMedica cita1 = new CitaMedica(true, LocalDate.of(2025, 02, 27),LocalTime.of(11, 30), 1, 5);
 //            CitaMedica citaAgendada = citaMedicaDAO.agendarCita(cita1);
 //            if(citaAgendada != null && citaAgendada.getIdCita()>0){
 //                System.out.println("Cita agendada con exito "+citaAgendada);
@@ -134,10 +134,10 @@ public class Hospital {
 //            e.printStackTrace();
 //        }
 
-//        Agendar Cita a nivel negocio
-        CitaMedica cita = new CitaMedica(true, LocalDate.of(2025, 02, 26), LocalTime.of(17, 30), 1, 2);
-        CitaAgendadaDTO citaAgendadaDTO = new CitaAgendadaDTO(cita.getIdMedico(), cita.getIdPaciente(), cita.getDiaSemana(), cita.getHora());
-        citaMedicaBO.agendarCita(citaAgendadaDTO);
+////      Agendar Cita a nivel negocio
+//        CitaMedica cita = new CitaMedica(true, LocalDate.of(2025, 02, 26), LocalTime.of(17, 30), 1, 2);
+//        CitaAgendadaDTO citaAgendadaDTO = new CitaAgendadaDTO(cita.getIdMedico(), cita.getIdPaciente(), cita.getDiaSemana(), cita.getHora());
+//        citaMedicaBO.agendarCita(citaAgendadaDTO);
 
 
 
