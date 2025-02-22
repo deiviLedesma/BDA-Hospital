@@ -71,6 +71,7 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         datePickerFechaNacimiento = new com.github.lgooddatepicker.components.DatePicker();
         pwContrasenia = new javax.swing.JPasswordField();
+        datePicker1 = new com.github.lgooddatepicker.components.DatePicker();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -170,17 +171,19 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel8)
-                    .addComponent(txtColoniaP)
-                    .addComponent(txtCalleP)
-                    .addComponent(txtApellidoPaternoP)
-                    .addComponent(txtNombreP)
-                    .addComponent(txtApellidoMaternoP)
-                    .addComponent(txtCorreoElecctronicoP)
-                    .addComponent(txtTelefonoP)
-                    .addComponent(txtNumeroP)
-                    .addComponent(pwContrasenia))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel8)
+                        .addComponent(txtColoniaP)
+                        .addComponent(txtCalleP)
+                        .addComponent(txtApellidoPaternoP)
+                        .addComponent(txtNombreP)
+                        .addComponent(txtApellidoMaternoP)
+                        .addComponent(txtCorreoElecctronicoP)
+                        .addComponent(txtTelefonoP)
+                        .addComponent(txtNumeroP)
+                        .addComponent(pwContrasenia))
+                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -216,8 +219,10 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
                     .addComponent(txtTelefonoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
-                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(datePicker1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -237,7 +242,7 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
                     .addComponent(pwContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         pack();
@@ -298,6 +303,7 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.github.lgooddatepicker.components.DatePicker datePicker1;
     private com.github.lgooddatepicker.components.DatePicker datePickerFechaNacimiento;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

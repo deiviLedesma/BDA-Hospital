@@ -39,17 +39,20 @@
                   <Component id="jLabel12" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtColoniaP" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtCalleP" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtApellidoPaternoP" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtNombreP" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtApellidoMaternoP" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtCorreoElecctronicoP" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtTelefonoP" alignment="0" max="32767" attributes="0"/>
-                  <Component id="txtNumeroP" alignment="0" max="32767" attributes="0"/>
-                  <Component id="pwContrasenia" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtColoniaP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtCalleP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtApellidoPaternoP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtNombreP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtApellidoMaternoP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtCorreoElecctronicoP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtTelefonoP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txtNumeroP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="pwContrasenia" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="datePicker1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -98,8 +101,11 @@
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="datePicker1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -123,7 +129,7 @@
               </Group>
               <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" pref="36" max="-2" attributes="0"/>
-              <EmptySpace pref="76" max="32767" attributes="0"/>
+              <EmptySpace pref="74" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -295,6 +301,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pwContraseniaActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="com.github.lgooddatepicker.components.DatePicker" name="datePicker1">
     </Component>
   </SubComponents>
 </Form>
