@@ -40,11 +40,11 @@ FOREIGN KEY (idMedico) REFERENCES medicos (idMedico)
 
 create table citaMedica(
 idCita int auto_increment primary key,
-programada boolean,
-diaSemana ENUM('lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo') not null,
+programada boolean not null,
+diaSemana DATE not null,
 hora TIME not null,
 folio varchar(8) unique null,
-estado ENUM('PENDIENTE', 'FINALIZADO', 'CANCELADO'), -- pendiente se refiere a que esta asignada pero aun no se atiende
+estado ENUM('PENDIENTE', 'FINALIZADO', 'CANCELADO') not null default 'PENDIENTE', -- pendiente se refiere a que esta asignada pero aun no se atiende
 idPaciente int,
 idMedico int,
 FOREIGN KEY (idPaciente) REFERENCES pacientes (idPaciente),
