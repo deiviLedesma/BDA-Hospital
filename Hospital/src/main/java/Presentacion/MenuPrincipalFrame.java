@@ -80,6 +80,11 @@ public class MenuPrincipalFrame extends javax.swing.JFrame {
         btnDoctor.setForeground(new java.awt.Color(255, 255, 255));
         btnDoctor.setText("Doctor");
         btnDoctor.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDoctorActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Ingresar como");
@@ -134,6 +139,12 @@ public class MenuPrincipalFrame extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btnPacienteActionPerformed
+
+    private void btnDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoctorActionPerformed
+        MenuDoctorFrame mdf = new MenuDoctorFrame();
+        this.dispose();
+        mdf.setVisible(true);
+    }//GEN-LAST:event_btnDoctorActionPerformed
 
     /**
      * @param args the command line arguments
