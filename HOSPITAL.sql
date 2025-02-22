@@ -30,9 +30,9 @@ contrasenia varchar(125) not null
 
 create table horarios_medicos(
 idHorario int auto_increment primary key,
-diaSemana ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') not null,
-horaInicio DATETIME not null,
-horaFin DATETIME not null,
+diaSemana ENUM('lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo') not null,
+horaInicio TIME not null,
+horaFin TIME not null,
 idMedico int,
 FOREIGN KEY (idMedico) REFERENCES medicos (idMedico)
 );
@@ -43,7 +43,7 @@ idCita int auto_increment primary key,
 tipo ENUM('PROGRAMADA', 'NO PROGRAMADA'),
 fechahora DATETIME not null,
 folio varchar(25) not null unique,
-estado ENUM('PENDIENTE','DISPONIBLE', 'FINALIZADO', 'CANCELADO'), -- pendiente se refiere a que esta asignada pero aun no se atiende
+estado ENUM('PENDIENTE', 'FINALIZADO', 'CANCELADO'), -- pendiente se refiere a que esta asignada pero aun no se atiende
 idPaciente int,
 idMedico int,
 FOREIGN KEY (idPaciente) REFERENCES pacientes (idPaciente),
