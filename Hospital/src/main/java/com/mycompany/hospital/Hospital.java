@@ -10,7 +10,9 @@ import Negocio.DTO.PacienteDTOViejo;
 import Negocio.Exception.NegocioException;
 import Persistencia.Conexion.Conexion;
 import Persistencia.Conexion.IConexion;
+import Persistencia.DAO.MedicoDAO;
 import Persistencia.DAO.PacienteDAO;
+import Persistencia.Entidades.Medico;
 import Persistencia.Entidades.Paciente;
 import Persistencia.PersistenciaException;
 import java.sql.Connection;
@@ -38,6 +40,7 @@ public class Hospital {
         IConexion conexionBD = new Conexion();
         PacienteDAO pacienteDAO = new PacienteDAO(conexionBD);
         PacienteBO pacienteBO = new PacienteBO(conexionBD);
+        MedicoDAO medicoDAO = new MedicoDAO(conexionBD);
         
         
 ////      Prueba de encriptación de la contraseña  
@@ -84,9 +87,9 @@ public class Hospital {
 //        List<Paciente> pacientes =pacienteDAO.buscarPacientePorNombre("ramon");
 //        System.out.println(pacientes);
         
-////      Prueba mostrar todos los pacientes persistencia
-//        List<Paciente> pacientes =pacienteDAO.MostrarTodosLosPacientes();
-//        System.out.println(pacientes);
+        //Prueba mostrar todos los pacientes persistencia
+        List<Paciente> pacientes =pacienteDAO.MostrarTodosLosPacientes();
+        System.out.println(pacientes);
 
 
 ////      Prueba agregar paciente a nivel negocio FUNCIONA
@@ -100,7 +103,12 @@ public class Hospital {
       
 ////      Mostrar x nombre a nivel negocio FUNCIONA
 //        System.out.println(pacienteBO.obtenerPorNombre("ramon"));
-    
+        List<Medico> medicos =medicoDAO.consultarTodosMedicos();
+        System.out.println(medicos);
+        List<Medico> medicosEspeciales =medicoDAO.consultarPorEspecialidad("Cardiología");
+        System.out.println(medicosEspeciales);
+        
+        medicoDAO.eliminarMedico(1);
         
     }    
 }
