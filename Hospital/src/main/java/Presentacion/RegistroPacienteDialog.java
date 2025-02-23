@@ -49,8 +49,8 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
 
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtCorreoElecctronicoP = new javax.swing.JTextField();
         txtTelefonoP = new javax.swing.JTextField();
+        txtCorreoElecctronicoP = new javax.swing.JTextField();
         txtCalleP = new javax.swing.JTextField();
         txtNombreP = new javax.swing.JTextField();
         txtColoniaP = new javax.swing.JTextField();
@@ -183,8 +183,8 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
                     .addComponent(txtNumeroP)
                     .addComponent(pwContrasenia)
                     .addComponent(datePicker1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtTelefonoP)
-                    .addComponent(txtCorreoElecctronicoP))
+                    .addComponent(txtCorreoElecctronicoP)
+                    .addComponent(txtTelefonoP))
                 .addContainerGap(126, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -213,11 +213,11 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
                         .addComponent(txtApellidoMaternoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorreoElecctronicoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTelefonoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(3, 3, 3)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefonoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCorreoElecctronicoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -372,8 +372,8 @@ public class RegistroPacienteDialog extends javax.swing.JDialog {
         txtNombreP.setText("");
         txtApellidoPaternoP.setText("");
         txtApellidoMaternoP.setText("");
-        txtTelefonoP.setText("");
         txtCorreoElecctronicoP.setText("");
+        txtTelefonoP.setText("");
         
         txtCalleP.setText("");
         txtColoniaP.setText("");
