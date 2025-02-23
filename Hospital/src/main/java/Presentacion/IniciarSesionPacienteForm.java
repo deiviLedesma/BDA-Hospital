@@ -236,7 +236,6 @@ public class IniciarSesionPacienteForm extends javax.swing.JFrame {
             }
             else{
                 JOptionPane.showMessageDialog(this, "Error al iniciar sesion");
-                limpiarCampos();  
             }
         } catch (NegocioException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
@@ -245,11 +244,6 @@ public class IniciarSesionPacienteForm extends javax.swing.JFrame {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error inesperado", e);
             JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado. Intente nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
-    
-    private void limpiarCampos(){
-        txtCorreoElectronico.setText("");
-        pwContrasenia.setText("");
     }
 
 }
