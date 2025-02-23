@@ -4,6 +4,7 @@
  */
 package Negocio.BO;
 
+import Negocio.DTO.PacienteDTOInicioSesion;
 import Negocio.DTO.PacienteDTONuevo;
 import Negocio.DTO.PacienteDTOViejo;
 import Negocio.Exception.NegocioException;
@@ -72,17 +73,16 @@ public class PacienteBO {
         return mapper.toDTOViejoList(pacientes);
     }
     
-    public boolean validarUsuario (String correo, String contrasenia) throws NegocioException{
+    public PacienteDTOViejo validarUsuario (PacienteDTOInicioSesion pacienteDTOinicioSesion) throws NegocioException{
         try{
-            Paciente paciente = pacienteDAO.buscarPacientePorCorreo(correo);
-            
+            Paciente paciente = pacienteDAO.buscarPacientePorCorreo(pacienteDTOinicioSesion.getCorreo());
             if(paciente == null){
                 throw new NegocioException("Usuario no encontrado");
             }
-            if(!checarContrasenia(contrasenia, paciente.getContrasenia())){
+            if(!checarContrasenia(pacienteDTOinicioSesion.getContrasenia(), paciente.getContrasenia())){
                 throw new NegocioException("Contraseña incorrecta");
             }
-            return true;
+            return mapper.toViejoDTO(paciente);
         }catch(PersistenciaException ex) {
             LOG.log(Level.SEVERE, "Error al acceder a la base de datos", ex);
             throw new NegocioException("Error al validar el usuario. Intente más tarde.", ex);
