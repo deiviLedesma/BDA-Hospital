@@ -117,5 +117,37 @@ public class MedicoDAO implements IMedicoDAO{
         }
         return listaMedicos;
     }
+
+    @Override
+    public Medico buscarMedicoPorCedula(String cedula) throws PersistenciaException {
+        Medico medico = null;
+        String consultaSQL = "SELECT * FROM medicos WHERE cedulaProfesional = ?";
+        
+        try (Connection con = this.conexion.crearConexion();
+                PreparedStatement ps = con.prepareStatement(consultaSQL)) {
+            
+            ps.setString(1, cedula);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) { //verificamos que se haya obtenido algo
+                    // Se crea el objeto medico y se asignan sus propiedades
+                    medico = new Medico(
+                            rs.getInt("idMedico"),
+                            rs.getString("nombre"),
+                            rs.getString("apellidoPaterno"),
+                            rs.getString("apellidoMaterno"),
+                            rs.getString("especialidad"),
+                            rs.getString("cedulaProfesional"),
+                            rs.getString("estado"),
+                            rs.getString("contrasenia")
+                    );
+                }
+            }
+        }catch (SQLException e) {
+        LOG.log(Level.SEVERE, "Error al buscar medico por cedula", e);
+        throw new PersistenciaException("Error al buscar medico por cedula", e);
+    }
+        return medico;
+    }
 }
 

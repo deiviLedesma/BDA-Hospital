@@ -5,6 +5,7 @@
 package Persistencia.DAO;
 
 import Persistencia.Entidades.Medico;
+import Persistencia.PersistenciaException;
 import java.util.List;
 
 /**
@@ -17,4 +18,6 @@ public interface IMedicoDAO {
     public List<Medico> consultarTodosMedicos();
     
     public List<Medico> consultarPorEspecialidad(String especialidad);
+    
+    public Medico buscarMedicoPorCedula (String cedula) throws PersistenciaException;
 }
