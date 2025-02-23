@@ -179,8 +179,8 @@ public class PacienteDAO implements IPacienteDAO {
                 }
             }
         }catch (SQLException e) {
-        LOG.log(Level.SEVERE, "Error al buscar pacientes por nombre", e);
-        throw new PersistenciaException("Error al buscar pacientes por nombre", e);
+        LOG.log(Level.SEVERE, "Error al buscar pacientes por correo", e);
+        throw new PersistenciaException("Error al buscar pacientes por correo", e);
     }
         return paciente;
     }
