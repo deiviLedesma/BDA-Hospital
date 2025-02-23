@@ -4,11 +4,33 @@
  */
 package Presentacion;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.DayOfWeek;
+import static java.time.DayOfWeek.FRIDAY;
+import static java.time.DayOfWeek.MONDAY;
+import static java.time.DayOfWeek.SATURDAY;
+import static java.time.DayOfWeek.THURSDAY;
+import static java.time.DayOfWeek.TUESDAY;
+import static java.time.DayOfWeek.WEDNESDAY;
+import java.time.LocalDate;
+import javax.swing.DefaultListModel;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+
 /**
  *
  * @author SDavidLedesma
  */
 public class AgendatCitaFrame extends javax.swing.JFrame {
+
+    // Componentes (simplificado)
+    private JComboBox<String> cmbEspecialidad;
+    private JList<String> lstMedicos;
+    private JList<String> lstHorarios;
 
     /**
      * Creates new form AgendatCitaFrame
@@ -17,6 +39,8 @@ public class AgendatCitaFrame extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        llenarComboEspecialidades();
+        configurarEventos();
     }
 
     /**
@@ -178,6 +202,122 @@ public class AgendatCitaFrame extends javax.swing.JFrame {
         this.dispose();
         frame.setVisible(true);
     }//GEN-LAST:event_btnAgendarActionPerformed
+
+    private void llenarComboEspecialidades() {
+        String user = "root";
+        String pass = "Inunanash1";
+        String sql = "SELECT DISTINCT especialidad FROM medicos";
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/HOSPITAL", "user", "pass"); PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                String especialidad = rs.getString("especialidad");
+                cmbEspecialidad.addItem(especialidad);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            // Manejo de error
+        }
+    }
+
+    private String obtenerDiaSemana(LocalDate fecha) {
+        // Mapea DayOfWeek a 'lunes', 'martes', etc.
+        DayOfWeek dow = fecha.getDayOfWeek();
+        switch (dow) {
+            case MONDAY:
+                return "lunes";
+            case TUESDAY:
+                return "martes";
+            case WEDNESDAY:
+                return "miércoles";
+            case THURSDAY:
+                return "jueves";
+            case FRIDAY:
+                return "Viernes";
+            case SATURDAY:
+                return "";
+
+        }
+        return "lunes"; // Por defecto
+    }
+
+    private void cargarMedicosPorFechaEspecialidad() {
+        lstMedicos.setModel(new DefaultListModel<>()); // Limpiar lista
+        String user = "root";
+        String pass = "Inunanash1";
+
+        String especialidad = (String) cmbEspecialidad.getSelectedItem();
+        LocalDate fecha = LocalDate.parse(txtFecha.getText());
+        String diaSemana = obtenerDiaSemana(fecha);
+
+        String sql = """
+      SELECT m.idMedico, CONCAT(m.nombre, ' ', m.apellidoPaterno) AS nombreCompleto
+      FROM medicos m
+      JOIN horarios_medicos h ON m.idMedico = h.idMedico
+      WHERE m.especialidad = ?
+        AND h.diaSemana = ?
+    """;
+
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/HOSPITAL", "user", "pass"); PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, especialidad);
+            ps.setString(2, diaSemana);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                DefaultListModel<String> modelo = new DefaultListModel<>();
+                while (rs.next()) {
+                    int idMedico = rs.getInt("idMedico");
+                    String nombreCompleto = rs.getString("nombreCompleto");
+                    // Almacena el id en el string o un Map si deseas
+                    modelo.addElement(idMedico + "-" + nombreCompleto);
+                }
+                lstMedicos.setModel(modelo);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void cargarHorariosDeMedico(int idMedico) {
+        lstHorarios.setModel(new DefaultListModel<>()); // Limpiar lista
+        String user = "root";
+        String pass = "Inunanash1";
+
+        String sql = """
+      SELECT horaInicio, horaFin
+      FROM horarios_medicos
+      WHERE idMedico = ?
+    """;
+
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/HOSPITAL", "user", "pass"); PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idMedico);
+            try (ResultSet rs = ps.executeQuery()) {
+                DefaultListModel<String> modelo = new DefaultListModel<>();
+                while (rs.next()) {
+                    String horaInicio = rs.getString("horaInicio");
+                    String horaFin = rs.getString("horaFin");
+                    modelo.addElement(horaInicio + " - " + horaFin);
+                }
+                lstHorarios.setModel(modelo);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void configurarEventos() {
+        // Cuando cambie la selección en lstMedicos
+        lstMedicos.addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                String seleccionado = lstMedicos.getSelectedValue();
+                if (seleccionado != null) {
+                    // Ejemplo: parsear '1 - Daniel Miramontes'
+                    int idMedico = Integer.parseInt(seleccionado.split("-")[0]);
+                    cargarHorariosDeMedico(idMedico);
+                }
+            }
+        });
+    }
 
     /**
      * @param args the command line arguments
