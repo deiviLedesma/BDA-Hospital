@@ -14,6 +14,7 @@ import Persistencia.DAO.IPacienteDAO;
 import Persistencia.DAO.PacienteDAO;
 import Persistencia.Entidades.Paciente;
 import Persistencia.PersistenciaException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -89,9 +90,53 @@ public class PacienteBO {
         }
     }
     
+    public boolean actualizarPaciente (int idPaciente, PacienteDTONuevo paciente) throws NegocioException{
+        if(idPaciente <= 0){
+            throw new NegocioException("El id no es valido");
+        }
+        if(paciente.getNombre().isEmpty() || paciente.getApellidoPaterno().isEmpty()
+                || paciente.getTelefono().isEmpty() || paciente.getCorreo().isEmpty() || 
+                paciente.getCalle().isEmpty()|| paciente.getColonia().isEmpty()||paciente.getNumero().isEmpty()
+                ||paciente.getContrasenia().isEmpty()){
+            throw new NegocioException("Faltan campos por llenar");
+        }
+        paciente.setNombre(formatoNombre(paciente.getNombre()));
+        paciente.setApellidoPaterno(formatoNombre(paciente.getApellidoPaterno()));
+        
+        if (paciente.getApellidoMaterno() != null && !paciente.getApellidoMaterno().trim().isEmpty()) {
+        paciente.setApellidoMaterno(formatoNombre(paciente.getApellidoMaterno()));
+        }
+        if (paciente.getFechaNacimiento() == null) {
+            throw new NegocioException("La fecha de nacimiento no puede estar vacía");
+        }
+        if (paciente.getTelefono().length() > 10 || paciente.getTelefono().length() > 10) {
+            throw new NegocioException("El teléfono debe ser de 10 numeros");
+        }
+        if (paciente.getFechaNacimiento().isAfter(LocalDate.now())) {
+            throw new NegocioException("La fecha de nacimiento no puede ser una fecha futura.");
+        }
+        if (!paciente.getCorreo().matches("^[a-zA-Z0-9._%+-]+@gmail\\.com$")) {
+        throw new NegocioException("El correo electrónico debe ser válido y terminar en @gmail.com.");
+        }
+        Paciente pacienteMapper = mapper.toEntity(paciente);
+        
+        try{
+            return pacienteDAO.actualizarPaciente(idPaciente, pacienteMapper);
+        } catch (PersistenciaException e){
+            LOG.log(Level.SEVERE, "Error al actualizar al paciente con ID" + idPaciente,e);
+            throw new NegocioException("No se pudo actualizar el paciente", e);
+        }
+        
+    }
+    
     
     //Para verificar que la contrasenia ingresada y la hasheada coinciden (usar en el inicio de sesion)
     private static boolean checarContrasenia(String contrasenia, String contraseniaHasheada) {
         return BCrypt.checkpw(contrasenia, contraseniaHasheada);
     }
+    
+    private String formatoNombre(String nombre) {
+    nombre = nombre.trim().toLowerCase(); // Convertir todo a minúsculas
+    return nombre.substring(0, 1).toUpperCase() + nombre.substring(1); // Primera letra mayúscula
+}
 }

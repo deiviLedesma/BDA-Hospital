@@ -21,4 +21,6 @@ public interface IPacienteDAO {
     public List<Paciente> MostrarTodosLosPacientes();
     
     public Paciente buscarPacientePorCorreo (String correo) throws PersistenciaException;
+    
+    public boolean actualizarPaciente(int idPaciente, Paciente paciente) throws PersistenciaException;
 }

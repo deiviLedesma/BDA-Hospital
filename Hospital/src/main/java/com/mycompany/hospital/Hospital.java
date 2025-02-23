@@ -162,6 +162,31 @@ public class Hospital {
 //        MedicoDTOViejo medico = medicoBO.validarUsuario(medic);
 //        System.out.println(medico);
 
-        
+
+////      Actualizar paciente nivel persistencia FUNCIONA
+//        try{
+//            int idactivista = 9;
+//            Paciente p1 = new Paciente("Malu", "Soto", "Acosta", LocalDate.of(2005, 4, 6), "malusoto@gmail.com", "Malu01", "6489432756", "por ahi", "ni idea", "9696");
+//            
+//            boolean pacienteActualizado = pacienteDAO.actualizarPaciente(idactivista, p1);
+//            
+//            if(pacienteActualizado == true){
+//                System.out.println("Paciente actualizado correctamente");
+//            }
+//            else{
+//                System.out.println("No se pudo actualizar");
+//            }
+//        
+//        } catch (PersistenciaException e) {
+//            System.out.println("Error al actualizar: " + e.getMessage());
+//            e.printStackTrace();
+//        }
+
+////      Actualizar paciente nivel negocio
+//        int idactivista = 10;
+//        PacienteDTONuevo p2 = new PacienteDTONuevo("sofia", "tovar", "   vidal  ",LocalDate.of(2014, 9, 14), "sofiatov@gmail.com", "6442553011", "ni idea", "por ahi", "9669", "Sofia001");
+//        boolean pacienteActualizado = pacienteBO.actualizarPaciente(idactivista, p2);
+//        System.out.println(pacienteActualizado);
+
     }    
 }

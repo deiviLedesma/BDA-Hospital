@@ -185,7 +185,35 @@ public class PacienteDAO implements IPacienteDAO {
         return paciente;
     }
     
-    
+    @Override
+    public boolean actualizarPaciente(int idPaciente, Paciente paciente) throws PersistenciaException {
+        
+        String consultaSQL = "UPDATE pacientes SET nombre = ?, apellidoPaterno = ?, apellidoMaterno = ?, fechaNacimiento = ?, correoElectronico = ?, telefono = ?, contrasenia = ?, calle = ?, colonia = ?, numero = ? WHERE idPaciente = ?;";
+        
+        try (Connection con = this.conexion.crearConexion();
+                PreparedStatement ps = con.prepareCall(consultaSQL)){
+            
+            String contraseniaHash = hashearContrasenia(paciente.getContrasenia());
+            
+            ps.setString(1, paciente.getNombre());
+            ps.setString(2, paciente.getApellidoPaterno());
+            ps.setString(3, paciente.getApellidoMaterno());
+            ps.setDate(4, java.sql.Date.valueOf(paciente.getFechaNacimiento()));
+            ps.setString(5, paciente.getCorreoElectronico());
+            ps.setString(6, paciente.getTelefono());
+            ps.setString(7, contraseniaHash);
+            ps.setString(8, paciente.getCalle());
+            ps.setString(9, paciente.getColonia());
+            ps.setString(10, paciente.getNumero());
+            ps.setInt(11, idPaciente);
+            
+            return ps.executeUpdate() > 0;
+            
+        } catch (SQLException e) {
+            Logger.getLogger(PacienteDAO.class.getName()).log(Level.SEVERE, null, e);
+            throw new PersistenciaException("Error al actualizar el Paciente");
+        }
+    }
     
     //Para encriptar la contrasenia
     private static String hashearContrasenia(String contrasenia) {
@@ -197,6 +225,8 @@ public class PacienteDAO implements IPacienteDAO {
     private static boolean checarContrasenia(String contrasenia, String contraseniaHasheada) {
         return BCrypt.checkpw(contrasenia, contraseniaHasheada);
     }
+
+    
 
     
    
