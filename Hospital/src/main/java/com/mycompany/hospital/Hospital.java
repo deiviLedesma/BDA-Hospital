@@ -5,8 +5,12 @@
 package com.mycompany.hospital;
 
 import Negocio.BO.CitaMedicaBO;
+import Negocio.BO.MedicoBO;
 import Negocio.BO.PacienteBO;
 import Negocio.DTO.CitaAgendadaDTO;
+import Negocio.DTO.MedicoDTOInicioSesion;
+import Negocio.DTO.MedicoDTOViejo;
+import Negocio.DTO.PacienteDTOInicioSesion;
 import Negocio.DTO.PacienteDTONuevo;
 import Negocio.DTO.PacienteDTOViejo;
 import Negocio.Exception.NegocioException;
@@ -46,6 +50,7 @@ public class Hospital {
         PacienteDAO pacienteDAO = new PacienteDAO(conexionBD);
         PacienteBO pacienteBO = new PacienteBO(conexionBD);
         MedicoDAO medicoDAO = new MedicoDAO(conexionBD);
+        MedicoBO medicoBO = new MedicoBO(conexionBD);
         CitaMedicaDAO citaMedicaDAO = new CitaMedicaDAO(conexionBD);
         CitaMedicaBO citaMedicaBO = new CitaMedicaBO(conexionBD);
         
@@ -144,8 +149,18 @@ public class Hospital {
 //        System.out.println(paciente);
 
 ////      Buscar paciente por correo a nivel negocio
-//        boolean exito = pacienteBO.validarUsuario("andres@gmail.com", "Andres001");
-//        System.out.println(exito);
+//        PacienteDTOInicioSesion pacient = new PacienteDTOInicioSesion("andres@gmail.com", "Andres001");
+//        PacienteDTOViejo paciente = pacienteBO.validarUsuario(pacient);
+//        System.out.println(paciente);
+
+////      Buscar medico por cedula a nivel persistencia FUNCIONA
+//        Medico medico = medicoDAO.buscarMedicoPorCedula("2475630");
+//        System.out.println(medico);
+
+////      Buscar medico por cedula a nivel negocio
+//        MedicoDTOInicioSesion medic = new MedicoDTOInicioSesion("1227765", "Doctor2");
+//        MedicoDTOViejo medico = medicoBO.validarUsuario(medic);
+//        System.out.println(medico);
 
         
     }    

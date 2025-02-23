@@ -141,9 +141,9 @@ public class MenuPrincipalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPacienteActionPerformed
 
     private void btnDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDoctorActionPerformed
-        MenuDoctorFrame mdf = new MenuDoctorFrame();
+        IniciarSesionDoctorFrame isdf = new IniciarSesionDoctorFrame();
         this.dispose();
-        mdf.setVisible(true);
+        isdf.setVisible(true);
     }//GEN-LAST:event_btnDoctorActionPerformed
 
     /**

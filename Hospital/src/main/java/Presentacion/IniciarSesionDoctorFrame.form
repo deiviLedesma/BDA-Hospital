@@ -54,7 +54,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="Password" max="32767" attributes="0"/>
+                              <Component id="pwContrasenia" max="32767" attributes="0"/>
                               <Component id="txtCedula" pref="118" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -79,7 +79,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Password" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="pwContrasenia" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="31" max="32767" attributes="0"/>
                   <Component id="jButton1" min="-2" max="-2" attributes="0"/>
@@ -146,7 +146,7 @@
             <Property name="text" type="java.lang.String" value="Contrase&#xf1;a"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="Password">
+        <Component class="javax.swing.JPasswordField" name="pwContrasenia">
         </Component>
         <Component class="javax.swing.JTextField" name="txtCedula">
         </Component>

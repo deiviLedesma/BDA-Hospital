@@ -34,7 +34,7 @@ public class MedicoMapper {
         return new MedicoDTONuevo(medico.getNombre(), medico.getApellidoPaterno(), 
                 medico.getApellidoMaterno(), 
                 medico.getEspecialidad(), 
-                medico.getCedulaProfesional(), 
+                medico.getCeludaProfesional(),
                 medico.getEstado(), medico.getContrasenia());
     }
     
@@ -42,10 +42,10 @@ public class MedicoMapper {
        if(medico == null){
             return null;
         }
-        return new MedicoDTOViejo(medico.getNombre(), medico.getApellidoPaterno(), 
+        return new MedicoDTOViejo(medico.getIdMedico(),medico.getNombre(), medico.getApellidoPaterno(), 
                 medico.getApellidoMaterno(), 
                 medico.getEspecialidad(), 
-                medico.getCedulaProfesional(), 
+                medico.getCeludaProfesional(), 
                 medico.getEstado(), medico.getContrasenia());
     }
     

@@ -4,12 +4,23 @@
  */
 package Presentacion;
 
+import Negocio.BO.MedicoBO;
+import Negocio.DTO.MedicoDTOInicioSesion;
+import Negocio.DTO.MedicoDTOViejo;
+import Negocio.Exception.NegocioException;
+import Negocio.configuracion.DependencyInjector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author SDavidLedesma
  */
 public class IniciarSesionDoctorFrame extends javax.swing.JFrame {
-
+    
+    private MedicoBO medicoBO = DependencyInjector.crearMedicoBO();
+    public int idMedicoActiva;
     /**
      * Creates new form IniciarSesionDoctorFrame
      */
@@ -33,7 +44,7 @@ public class IniciarSesionDoctorFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        Password = new javax.swing.JPasswordField();
+        pwContrasenia = new javax.swing.JPasswordField();
         txtCedula = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
@@ -94,7 +105,7 @@ public class IniciarSesionDoctorFrame extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Password)
+                            .addComponent(pwContrasenia)
                             .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(211, 211, 211)
@@ -112,7 +123,7 @@ public class IniciarSesionDoctorFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pwContrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(23, 23, 23))
@@ -133,9 +144,7 @@ public class IniciarSesionDoctorFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        MenuDoctorFrame mdf = new MenuDoctorFrame();
-        this.dispose();
-        mdf.setVisible(true);
+        iniciarSesionMedico();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -174,13 +183,41 @@ public class IniciarSesionDoctorFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPasswordField Password;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField pwContrasenia;
     private javax.swing.JTextField txtCedula;
     // End of variables declaration//GEN-END:variables
+    
+    private void iniciarSesionMedico (){
+        try {
+            String cedula = txtCedula.getText();
+            char[] contraseniaChar = pwContrasenia.getPassword();
+            
+            String contrasenia = new String(contraseniaChar);
+            
+            MedicoDTOInicioSesion medico = new MedicoDTOInicioSesion(cedula, contrasenia);
+            MedicoDTOViejo medicoInicioSesion = medicoBO.validarUsuario(medico);
+            
+            if(medicoInicioSesion != null){
+                idMedicoActiva = medicoInicioSesion.getIdMedico();
+                MenuDoctorFrame ismf = new MenuDoctorFrame();
+                this.dispose();
+                ismf.setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "Error al iniciar sesion");
+            }
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } catch(Exception e){
+            // En caso de un error inesperado, se puede loguear y mostrar un mensaje genérico
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error inesperado", e);
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado. Intente nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

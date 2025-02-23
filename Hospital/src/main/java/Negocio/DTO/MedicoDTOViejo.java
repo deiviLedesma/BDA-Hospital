@@ -10,6 +10,7 @@ package Negocio.DTO;
  */
 public class MedicoDTOViejo {
     
+    private int idMedico;
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
@@ -17,9 +18,6 @@ public class MedicoDTOViejo {
     private String cedulaProfesional;
     private String estado;
     private String contrasenia;
-
-    public MedicoDTOViejo() {
-    }
 
     public MedicoDTOViejo(String nombre, String apellidoPaterno, String apellidoMaterno, String especialidad, String cedulaProfesional, String estado,String contrasenia) {
         this.nombre = nombre;
@@ -30,7 +28,26 @@ public class MedicoDTOViejo {
         this.estado = estado;
         this.contrasenia = contrasenia;
     }
-    
+
+    public MedicoDTOViejo(int idMedico, String nombre, String apellidoPaterno, String apellidoMaterno, String especialidad, String cedulaProfesional, String estado, String contrasenia) {
+        this.idMedico = idMedico;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.especialidad = especialidad;
+        this.cedulaProfesional = cedulaProfesional;
+        this.estado = estado;
+        this.contrasenia = contrasenia;
+    }
+
+    public int getIdMedico() {
+        return idMedico;
+    }
+
+    public void setIdMedico(int idMedico) {
+        this.idMedico = idMedico;
+    }
+
     public String getNombre() {
         return nombre;
     }
@@ -89,10 +106,9 @@ public class MedicoDTOViejo {
 
     @Override
     public String toString() {
-        return "MedicoDTOViejo{" + "nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", especialidad=" + especialidad + ", cedulaProfesional=" + cedulaProfesional + ", estado=" + estado + ", contrasenia=" + contrasenia + '}';
+        return "MedicoDTOViejo{" + "idMedico=" + idMedico + ", nombre=" + nombre + ", apellidoPaterno=" + apellidoPaterno + ", apellidoMaterno=" + apellidoMaterno + ", especialidad=" + especialidad + ", cedulaProfesional=" + cedulaProfesional + ", estado=" + estado + ", contrasenia=" + contrasenia + '}';
     }
 
-    
     
     
 }

@@ -4,6 +4,7 @@
  */
 package Negocio.configuracion;
 
+import Negocio.BO.MedicoBO;
 import Negocio.BO.PacienteBO;
 import Persistencia.Conexion.Conexion;
 import Persistencia.Conexion.IConexion;
@@ -16,8 +17,15 @@ public class DependencyInjector {
     
     public static PacienteBO crearPacienteBO(){
         IConexion conexion = new Conexion();
-        PacienteBO activistaBO = new PacienteBO(conexion);
+        PacienteBO pacienteBO = new PacienteBO(conexion);
         
-        return activistaBO;
+        return pacienteBO;
+    }
+    
+    public static MedicoBO crearMedicoBO(){
+        IConexion conexion = new Conexion();
+        MedicoBO medicoBO = new MedicoBO(conexion);
+        
+        return medicoBO;
     }
 }
