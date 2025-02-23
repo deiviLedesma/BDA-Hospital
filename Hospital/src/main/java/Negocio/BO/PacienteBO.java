@@ -16,6 +16,7 @@ import Persistencia.PersistenciaException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  *
@@ -71,5 +72,26 @@ public class PacienteBO {
         return mapper.toDTOViejoList(pacientes);
     }
     
+    public boolean validarUsuario (String correo, String contrasenia) throws NegocioException{
+        try{
+            Paciente paciente = pacienteDAO.buscarPacientePorCorreo(correo);
+            
+            if(paciente == null){
+                throw new NegocioException("Usuario no encontrado");
+            }
+            if(!checarContrasenia(contrasenia, paciente.getContrasenia())){
+                throw new NegocioException("Contraseña incorrecta");
+            }
+            return true;
+        }catch(PersistenciaException ex) {
+            LOG.log(Level.SEVERE, "Error al acceder a la base de datos", ex);
+            throw new NegocioException("Error al validar el usuario. Intente más tarde.", ex);
+        }
+    }
     
+    
+    //Para verificar que la contrasenia ingresada y la hasheada coinciden (usar en el inicio de sesion)
+    private static boolean checarContrasenia(String contrasenia, String contraseniaHasheada) {
+        return BCrypt.checkpw(contrasenia, contraseniaHasheada);
+    }
 }

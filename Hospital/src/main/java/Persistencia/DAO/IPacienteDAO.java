@@ -19,4 +19,6 @@ public interface IPacienteDAO {
     public List<Paciente> buscarPacientePorNombre(String nombre)throws PersistenciaException;
     
     public List<Paciente> MostrarTodosLosPacientes();
+    
+    public Paciente buscarPacientePorCorreo (String correo) throws PersistenciaException;
 }

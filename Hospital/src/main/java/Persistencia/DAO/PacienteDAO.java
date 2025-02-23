@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -148,6 +149,43 @@ public class PacienteDAO implements IPacienteDAO {
         return pacientes;
     }
     
+    @Override
+    public Paciente buscarPacientePorCorreo(String correo) throws PersistenciaException {
+        Paciente paciente = null;
+        String consultaSQL = "SELECT * FROM pacientes WHERE correoElectronico = ?";
+        
+        try (Connection con = this.conexion.crearConexion();
+                PreparedStatement ps = con.prepareStatement(consultaSQL)) {
+            
+            ps.setString(1, correo);
+            
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) { //verificamos que se haya obtenido algo
+                    // Se crea el objeto paciente y se asignan sus propiedades
+                    paciente = new Paciente( // es el que definimos al inicio
+                    
+                    rs.getInt("idPaciente"),
+                    rs.getString("nombre"),
+                    rs.getString("apellidoPaterno"),
+                    rs.getString("apellidoMaterno"),
+                    rs.getDate("fechaNacimiento").toLocalDate(), // Convertimos a LocalDate
+                    rs.getString("correoElectronico"),
+                    rs.getString("contrasenia"),
+                    rs.getString("telefono"),
+                    rs.getString("calle"),
+                    rs.getString("colonia"),
+                    rs.getString("numero")
+                    );
+                }
+            }
+        }catch (SQLException e) {
+        LOG.log(Level.SEVERE, "Error al buscar pacientes por nombre", e);
+        throw new PersistenciaException("Error al buscar pacientes por nombre", e);
+    }
+        return paciente;
+    }
+    
+    
     
     //Para encriptar la contrasenia
     private static String hashearContrasenia(String contrasenia) {
@@ -159,6 +197,8 @@ public class PacienteDAO implements IPacienteDAO {
     private static boolean checarContrasenia(String contrasenia, String contraseniaHasheada) {
         return BCrypt.checkpw(contrasenia, contraseniaHasheada);
     }
+
+    
    
     
     
