@@ -4,6 +4,10 @@
  */
 package Presentacion;
 
+import Negocio.Exception.NegocioException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author SDavidLedesma
@@ -15,6 +19,8 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
      */
     public MenuPacienteFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -65,9 +71,19 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
 
         btnAgendar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAgendar.setText("Agendar Cita");
+        btnAgendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgendarActionPerformed(evt);
+            }
+        });
 
         btnEmergencia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEmergencia.setText("Cita de Emergencia");
+        btnEmergencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmergenciaActionPerformed(evt);
+            }
+        });
 
         btnPerfil.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnPerfil.setText("Mi Perfil");
@@ -79,12 +95,27 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
 
         btnCitas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCitas.setText("Ver mis Citas");
+        btnCitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCitasActionPerformed(evt);
+            }
+        });
 
         btnHistorial.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHistorial.setText("Historial Médico");
+        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialActionPerformed(evt);
+            }
+        });
 
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesion");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,6 +180,30 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
         this.dispose();
         frm.setVisible(true);
     }//GEN-LAST:event_btnPerfilActionPerformed
+
+    private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
+        AgendatCitaFrame acf = new AgendatCitaFrame();
+        acf.setVisible(true);
+    }//GEN-LAST:event_btnAgendarActionPerformed
+
+    private void btnEmergenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmergenciaActionPerformed
+        ConsultaEmergenciaFrame cef = new ConsultaEmergenciaFrame();
+        cef.setVisible(true);
+    }//GEN-LAST:event_btnEmergenciaActionPerformed
+
+    private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
+        CitasPaciente citasPaciente = new CitasPaciente();
+        citasPaciente.setVisible(true);
+    }//GEN-LAST:event_btnCitasActionPerformed
+
+    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
+        HistorialPacienteFrame hpf = new HistorialPacienteFrame();
+        hpf.setVisible(true);
+    }//GEN-LAST:event_btnHistorialActionPerformed
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -183,6 +238,7 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgendar;

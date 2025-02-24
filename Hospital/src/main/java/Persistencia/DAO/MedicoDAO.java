@@ -46,6 +46,7 @@ public class MedicoDAO implements IMedicoDAO{
             throw new PersistenciaException("Error al eliminar activista.", e);        }
     }
     
+    @Override
     public List<Medico> consultarTodosMedicos(){
         List<Medico> listaMedicos = new ArrayList<>();
         String consultaSQL = "SELECT * FROM MEDICOS";
@@ -82,6 +83,7 @@ public class MedicoDAO implements IMedicoDAO{
         return listaMedicos;
     }
     
+    @Override
     public List<Medico> consultarPorEspecialidad(String especialidad){
         List<Medico> listaMedicos = new ArrayList<>();
         String consultaSQL = "SELECT * FROM MEDICOS where especialidad = ?";

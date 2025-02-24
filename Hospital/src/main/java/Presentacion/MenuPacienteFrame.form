@@ -144,6 +144,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Agendar Cita"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAgendarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEmergencia">
           <Properties>
@@ -152,6 +155,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cita de Emergencia"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmergenciaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnPerfil">
           <Properties>
@@ -171,6 +177,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Ver mis Citas"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCitasActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnHistorial">
           <Properties>
@@ -179,6 +188,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Historial M&#xe9;dico"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistorialActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCerrarSesion">
           <Properties>
@@ -187,6 +199,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cerrar Sesion"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCerrarSesionActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

@@ -4,6 +4,9 @@
  */
 package Presentacion;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author SDavidLedesma
@@ -233,6 +236,29 @@ public class HistorialDoctorFrame extends javax.swing.JFrame {
         });
     }
 
+    
+    /*
+    public void llenarTablaHistorial() {
+    // Limpiar tabla antes de agregar nuevos datos
+    DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+    modelo.setRowCount(0);
+
+    // Obtener el historial del paciente en sesión
+
+    for (HistorialDTO h : lista) {
+        modelo.addRow(new Object[]{
+            h.getId(),
+            h.getFecha(),
+            h.getDiagnostico(),
+            h.getTratamiento(),
+            h.getFolio()
+        });
+    }
+
+
+}
+*/    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnBuscarFecha;
