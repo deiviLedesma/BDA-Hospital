@@ -7,11 +7,16 @@ package Persistencia.DAO;
 import Persistencia.Conexion.IConexion;
 import Persistencia.Entidades.CitaMedica;
 import Persistencia.PersistenciaException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,7 +78,28 @@ public class CitaMedicaDAO implements ICitaMedicaDAO{
     
     }
     
-    
+    @Override
+    public List<LocalTime> obtenerHorariosDisponibles(int idMedico, String diaSemana, LocalDate fecha) throws PersistenciaException {
+        List<LocalTime> horarios = new ArrayList<>();
+        String consultaSQL = "{CALL ObtenerHorariosDisponibles(?, ?, ?)}";
+
+        try (Connection con = this.conexion.crearConexion();
+                CallableStatement cs = con.prepareCall(consultaSQL)) {
+            cs.setInt(1, idMedico);
+            cs.setString(2, diaSemana);
+            cs.setDate(3, java.sql.Date.valueOf(fecha));
+
+            try (ResultSet rs = cs.executeQuery()) {
+                while (rs.next()) {
+                    horarios.add(rs.getTime("hora").toLocalTime()); // Agrega cada horario disponible
+                }
+            }
+        }catch (SQLException e) {
+        LOG.log(Level.SEVERE, "Error al hacer la lista de horarios", e);
+        throw new PersistenciaException("Error al hacer la lista de horarios", e);
+    }
+        return horarios;
+    }
     
     
     
@@ -91,6 +117,8 @@ public class CitaMedicaDAO implements ICitaMedicaDAO{
         
         return folio.toString();
     }
+
+    
     
     
 }

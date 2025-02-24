@@ -206,4 +206,47 @@ BEGIN
 	END IF;
 END $$
 DELIMITER ;
-	
+
+-- ------------------------------------------------------------------------------------------
+-- Procedimiento para obtener los horarios de cita disponibles del momento
+
+DELIMITER $$
+
+CREATE PROCEDURE ObtenerHorariosDisponibles(
+    IN p_idMedico INT,
+    IN p_diaSemana ENUM('lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'),
+    IN p_fecha DATE
+)
+BEGIN
+    -- Generar los intervalos de 30 minutos y excluir horarios ocupados
+    WITH RECURSIVE intervalos AS (
+        -- Caso base: Primer horario del médico
+        SELECT horaInicio AS hora
+        FROM horarios_medicos
+        WHERE idMedico = p_idMedico AND diaSemana = p_diaSemana
+
+        UNION ALL
+
+        -- Caso recursivo: Sumar 30 minutos en cada iteración
+        SELECT ADDTIME(hora, '00:30:00')
+        FROM intervalos
+        WHERE ADDTIME(hora, '00:30:00') < (
+            SELECT horaFin FROM horarios_medicos 
+            WHERE idMedico = p_idMedico AND diaSemana = p_diaSemana
+        )
+    )
+
+    -- Mostrar solo los horarios disponibles (sin citas programadas)
+    SELECT i.hora 
+    FROM intervalos i
+    WHERE NOT EXISTS (
+        SELECT 1 FROM citaMedica c
+        WHERE c.idMedico = p_idMedico 
+        AND c.diaSemana = p_fecha
+        AND c.hora = i.hora
+        AND c.estado = 'PENDIENTE'
+    );
+
+END$$
+
+DELIMITER ;

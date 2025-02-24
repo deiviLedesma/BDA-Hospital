@@ -5,6 +5,9 @@
 package Persistencia.DAO;
 
 import Persistencia.Entidades.CitaMedica;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 
 /**
  *
@@ -13,5 +16,7 @@ import Persistencia.Entidades.CitaMedica;
 public interface ICitaMedicaDAO {
     
     public CitaMedica agendarCita(CitaMedica citaMedica) throws Persistencia.PersistenciaException;
+    
+    public List<LocalTime> obtenerHorariosDisponibles (int idMedico, String diaSemana, LocalDate fecha) throws Persistencia.PersistenciaException;
     
 }
