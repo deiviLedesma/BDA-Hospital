@@ -139,7 +139,7 @@ public class Hospital {
 //            e.printStackTrace();
 //        }
 
-////      Agendar Cita a nivel negocio FUNCIONA
+////      Agendar Cita a nivel negocio 
 //        CitaMedica cita = new CitaMedica(true, LocalDate.of(2025, 02, 26), LocalTime.of(17, 30), 1, 2);
 //        CitaAgendadaDTO citaAgendadaDTO = new CitaAgendadaDTO(cita.getIdMedico(), cita.getIdPaciente(), cita.getDiaSemana(), cita.getHora());
 //        citaMedicaBO.agendarCita(citaAgendadaDTO);
@@ -193,8 +193,8 @@ public class Hospital {
 //        System.out.println(horariosDisponibles);
             
 ////      Buscar horarios disponibles de un doctor a nivel negocio FUNCIONA
-        List<LocalTime> horariosDisponibles = citaMedicaBO.obtenerHorariosDisponibles(5, LocalDate.of(2025, 02, 27));
-        System.out.println(horariosDisponibles);
+//        List<LocalTime> horariosDisponibles = citaMedicaBO.obtenerHorariosDisponibles(5, LocalDate.of(2025, 02, 27));
+//        System.out.println(horariosDisponibles);
 
     }    
 }

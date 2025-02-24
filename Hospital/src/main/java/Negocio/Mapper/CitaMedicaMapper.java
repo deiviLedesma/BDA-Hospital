@@ -21,6 +21,7 @@ public class CitaMedicaMapper {
         cita.setIdPaciente(dto.getIdPaciente());
         cita.setDiaSemana(dto.getDiaSemana());
         cita.setHora(dto.getHora());
+        cita.setProgramada(dto.isProgramada());
 
         return cita;
     }

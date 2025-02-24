@@ -98,6 +98,11 @@ public class AgendatCitaFrame extends javax.swing.JFrame {
         jLabel3.setText("Especialidad");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -204,6 +209,10 @@ public class AgendatCitaFrame extends javax.swing.JFrame {
         frame.setVisible(true);
     }//GEN-LAST:event_btnAgendarActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     private void llenarComboEspecialidades() {
         String user = "root";
         String pass = "Inunanash1";
@@ -281,7 +290,7 @@ public class AgendatCitaFrame extends javax.swing.JFrame {
     private void cargarHorariosDeMedico(int idMedico) {
         lstHorarios.setModel(new DefaultListModel<>()); // Limpiar lista
         String user = "root";
-        String pass = "Inunanash1";
+        String pass = "49075Tov";
 
         String sql = """
       SELECT horaInicio, horaFin

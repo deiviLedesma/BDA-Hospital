@@ -4,6 +4,7 @@
  */
 package Negocio.configuracion;
 
+import Negocio.BO.CitaMedicaBO;
 import Negocio.BO.MedicoBO;
 import Negocio.BO.PacienteBO;
 import Persistencia.Conexion.Conexion;
@@ -27,5 +28,12 @@ public class DependencyInjector {
         MedicoBO medicoBO = new MedicoBO(conexion);
         
         return medicoBO;
+    }
+    
+    public static CitaMedicaBO crearCitaMedicaBO(){
+        IConexion conexion = new Conexion();
+        CitaMedicaBO citaMedicaBO = new CitaMedicaBO(conexion);
+        
+        return citaMedicaBO;
     }
 }

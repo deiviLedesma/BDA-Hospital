@@ -65,6 +65,11 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
 
         btnAgendar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAgendar.setText("Agendar Cita");
+        btnAgendar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgendarActionPerformed(evt);
+            }
+        });
 
         btnEmergencia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEmergencia.setText("Cita de Emergencia");
@@ -85,6 +90,11 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
 
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesion");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,6 +159,19 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
         this.dispose();
         frm.setVisible(true);
     }//GEN-LAST:event_btnPerfilActionPerformed
+
+    private void btnAgendarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgendarActionPerformed
+        AgendarCitaProgramada acpf = new AgendarCitaProgramada();
+        this.dispose();
+        acpf.setVisible(true);
+        
+    }//GEN-LAST:event_btnAgendarActionPerformed
+
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        MenuPrincipalFrame mpf = new MenuPrincipalFrame();
+        this.dispose();
+        mpf.setVisible(true);
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
     /**
      * @param args the command line arguments
      */

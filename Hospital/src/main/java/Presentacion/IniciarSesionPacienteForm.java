@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
 public class IniciarSesionPacienteForm extends javax.swing.JFrame {
     
     private PacienteBO pacienteBO = DependencyInjector.crearPacienteBO();
-    public int idPacienteActiva;
+    public static int idPacienteActiva;
     /**
      * Creates new form IniciarSesion
      */
@@ -229,7 +229,8 @@ public class IniciarSesionPacienteForm extends javax.swing.JFrame {
             PacienteDTOViejo pacienteInicioSesion = pacienteBO.validarUsuario(paciente);
             
             if(pacienteInicioSesion != null){
-                idPacienteActiva = pacienteInicioSesion.getIdPaciente();
+                SesionActual.setIdUsuario(pacienteInicioSesion.getIdPaciente());
+                SesionActual.setUsuario(pacienteInicioSesion.getCorreo());
                 MenuPacienteFrame ispf = new MenuPacienteFrame();
                 this.dispose();
                 ispf.setVisible(true);
