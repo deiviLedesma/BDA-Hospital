@@ -188,11 +188,13 @@ public class Hospital {
 //        boolean pacienteActualizado = pacienteBO.actualizarPaciente(idactivista, p2);
 //        System.out.println(pacienteActualizado);
 
-////      Buscar horarios disponibles de un doctor a nivel persistencia
+////      Buscar horarios disponibles de un doctor a nivel persistencia FUNCIONA
 //        List<LocalTime> horariosDisponibles = citaMedicaDAO.obtenerHorariosDisponibles(5, "jueves", LocalDate.of(2025, 02, 27));
 //        System.out.println(horariosDisponibles);
             
-        
+////      Buscar horarios disponibles de un doctor a nivel negocio FUNCIONA
+        List<LocalTime> horariosDisponibles = citaMedicaBO.obtenerHorariosDisponibles(5, LocalDate.of(2025, 02, 27));
+        System.out.println(horariosDisponibles);
 
     }    
 }

@@ -13,6 +13,8 @@ import Persistencia.DAO.ICitaMedicaDAO;
 import Persistencia.Entidades.CitaMedica;
 import Persistencia.PersistenciaException;
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,6 +56,34 @@ public class CitaMedicaBO {
             throw new NegocioException("Hubo un error al agendar la cita.", ex);
         }
         
+    }
+    
+    public List<LocalTime> obtenerHorariosDisponibles (int idMedico, LocalDate fecha) throws NegocioException{
+        
+        if (fecha == null){
+            throw new NegocioException("Ingrese una fecha porfavor");
+        }
+        if (fecha.isBefore(LocalDate.now())) {
+            throw new NegocioException("No puedes agendar citas en fechas pasadas.");
+        }
+        String diaSemana = fecha.getDayOfWeek().name().toLowerCase();
+        if (null != diaSemana)switch (diaSemana) {
+            case "monday" -> diaSemana = "lunes";
+            case "tuesday" -> diaSemana = "martes";
+            case "wednesday" -> diaSemana = "miércoles";
+            case "thursday" -> diaSemana = "jueves";
+            case "friday" -> diaSemana = "viernes";
+            case "saturday" -> diaSemana = "sábado";
+            case "sunday" -> diaSemana = "domingo";
+            default -> {
+            }
+        }
+        try{
+        return citaMedicaDAO.obtenerHorariosDisponibles(idMedico, diaSemana, fecha);
+        }catch(PersistenciaException ex) {
+            LOG.log(Level.SEVERE, "Error al acceder a la base de datos", ex);
+            throw new NegocioException("Error al obtener horarios. Intente más tarde.", ex);
+        }
     }
     
     
