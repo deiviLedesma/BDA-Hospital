@@ -10,10 +10,11 @@ package Presentacion;
  */
 public class PerfilPacienteFrm extends javax.swing.JFrame {
 
+    
     /**
      * Creates new form PerfilPacienteFrm
      */
-    public PerfilPacienteFrm() {
+    public PerfilPacienteFrm()  {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -218,11 +219,51 @@ public class PerfilPacienteFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-       MenuPacienteFrame mpf = new MenuPacienteFrame();
-       this.dispose();
-       mpf.setVisible(true);
+        MenuPacienteFrame mpf = new MenuPacienteFrame();
+        this.dispose();
+        mpf.setVisible(true);
     }//GEN-LAST:event_btnGuardarActionPerformed
 
+   /*
+    private void obtenerDatos()  {
+                
+            txtNombre.setText(paciente.getNombre());
+            txtAPellidoPaterno.setText(paciente.getApellidoPaterno());
+            txtApellidoMaterno.setText(paciente.getApellidoMaterno());
+            txtColonia.setText(paciente.getColonia());
+            txtCalle.setText(paciente.getCalle());
+            txtNumero.setText(paciente.getNumero());
+            datePicker1.setDate(paciente.getFechaNacimiento());
+            txtTelefono.setText(paciente.getTelefono());
+            txtCorreo.setText(paciente.getCorreo());
+        
+    }
+    */
+
+    /*
+    private void GuardarCambios() {
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Deseas guardar los cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            try {
+
+                // Actualizar los datos del objeto PacienteDTO
+                paciente.setNombre(txtNombre.getText());
+                paciente.setApellidoPaterno(txtAPellidoPaterno.getText());
+                paciente.setApellidoMaterno(txtApellidoMaterno.getText());
+                paciente.setColonia(txtColonia.getText());
+                paciente.setCalle(txtCalle.getText());
+                paciente.setNumero(txtNumero.getText());
+                paciente.setFechaNacimiento(datePicker1.getDate());
+                paciente.setTelefono(txtTelefono.getText());
+                paciente.setCorreo(txtCorreo.getText());
+
+            } catch (Exception e) {
+
+            }
+        }
+    }
+*/
     /**
      * @param args the command line arguments
      */

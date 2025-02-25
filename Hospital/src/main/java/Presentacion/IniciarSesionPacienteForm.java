@@ -26,6 +26,8 @@ public class IniciarSesionPacienteForm extends javax.swing.JFrame {
      */
     public IniciarSesionPacienteForm() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

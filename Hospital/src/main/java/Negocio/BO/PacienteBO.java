@@ -33,6 +33,8 @@ public class PacienteBO {
     public PacienteBO(IConexion conexion) {
         this.pacienteDAO = new PacienteDAO(conexion);
     }
+
+    
     
     public boolean agregarPaciente(PacienteDTONuevo paciente)throws NegocioException {
         if(paciente == null){

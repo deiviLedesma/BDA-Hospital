@@ -4,17 +4,23 @@
  */
 package Presentacion;
 
+import Negocio.Exception.NegocioException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author SDavidLedesma
  */
 public class MenuPacienteFrame extends javax.swing.JFrame {
-
+    //Cambio menorrrrr
     /**
      * Creates new form MenuPacienteFrame
      */
     public MenuPacienteFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
@@ -89,9 +95,19 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
 
         btnCitas.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCitas.setText("Ver mis Citas");
+        btnCitas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCitasActionPerformed(evt);
+            }
+        });
 
         btnHistorial.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnHistorial.setText("Historial Médico");
+        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialActionPerformed(evt);
+            }
+        });
 
         btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesion");
@@ -183,6 +199,16 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
         this.dispose();
         ace.setVisible(true);
     }//GEN-LAST:event_btnEmergenciaActionPerformed
+
+    private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
+        CitasPaciente citasPaciente = new CitasPaciente();
+        citasPaciente.setVisible(true);
+    }//GEN-LAST:event_btnCitasActionPerformed
+
+    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
+        HistorialPacienteFrame hpf = new HistorialPacienteFrame();
+        hpf.setVisible(true);
+    }//GEN-LAST:event_btnHistorialActionPerformed
     /**
      * @param args the command line arguments
      */
@@ -217,6 +243,7 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgendar;

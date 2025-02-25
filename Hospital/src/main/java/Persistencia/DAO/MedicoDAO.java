@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -21,14 +22,13 @@ import java.util.logging.Logger;
  * @author Ramón Zamudio
  */
 public class MedicoDAO implements IMedicoDAO{
-    
+    //cambio menorrrrrrrr
     IConexion conexion;
-    private static final Logger LOG = Logger.getLogger(MedicoDAO.class.getName());
-    
+
     public MedicoDAO(IConexion conexion) {
         this.conexion = conexion;
     }
-    
+    private static final Logger LOG = Logger.getLogger(MedicoDAO.class.getName());
     
    
     @Override
@@ -47,6 +47,7 @@ public class MedicoDAO implements IMedicoDAO{
             throw new PersistenciaException("Error al eliminar activista.", e);        }
     }
     
+    @Override
     public List<Medico> consultarTodosMedicos(){
         List<Medico> listaMedicos = new ArrayList<>();
         String consultaSQL = "SELECT * FROM MEDICOS";
@@ -83,6 +84,7 @@ public class MedicoDAO implements IMedicoDAO{
         return listaMedicos;
     }
     
+    @Override
     public List<Medico> consultarPorEspecialidad(String especialidad){
         List<Medico> listaMedicos = new ArrayList<>();
         String consultaSQL = "SELECT * FROM MEDICOS where especialidad = ?";
@@ -151,4 +153,3 @@ public class MedicoDAO implements IMedicoDAO{
         return medico;
     }
 }
-
