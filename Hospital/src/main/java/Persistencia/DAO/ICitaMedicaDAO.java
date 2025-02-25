@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface ICitaMedicaDAO {
     
-    public CitaMedica agendarCita(CitaMedica citaMedica) throws Persistencia.PersistenciaException;
+    public CitaMedica agendarCita(CitaMedica citaMedica, String folio) throws Persistencia.PersistenciaException;
     
     public  List<Object[]> obtenerHorariosDisponibles (int idMedico, String diaSemana) throws Persistencia.PersistenciaException;
     

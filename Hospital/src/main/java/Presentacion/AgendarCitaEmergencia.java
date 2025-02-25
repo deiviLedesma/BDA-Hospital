@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -202,10 +203,11 @@ public class AgendarCitaEmergencia extends javax.swing.JFrame {
             int idMedico = (int) horario[1];
             int idPaciente = SesionActual.getIdUsuario();
             CitaNoAgendadaDTO cita = new CitaNoAgendadaDTO(idMedico, idPaciente, hora);
+            String folioGenerado = generarFolio();
             
-            boolean exito = citaMedicaBO.agendarCitaEmergencia(cita);
+            boolean exito = citaMedicaBO.agendarCitaEmergencia(cita,folioGenerado);
             if(exito){
-                JOptionPane.showMessageDialog(this, "Cita agendada correctamente");
+                JOptionPane.showMessageDialog(this, "Cita agendada correctamente\n Folio: " + folioGenerado);
                 MenuPacienteFrame mpf = new MenuPacienteFrame();
                 this.dispose();
                 mpf.setVisible(true);
@@ -220,7 +222,16 @@ public class AgendarCitaEmergencia extends javax.swing.JFrame {
         }
     }
     
-    
+    public static String generarFolio() {
+        Random random = new Random();
+        StringBuilder folio = new StringBuilder();
+        
+        for (int i = 0; i < 8; i++) {
+            folio.append(random.nextInt(10)); // Genera un número entre 0 y 9
+        }
+        
+        return folio.toString();
+    }
     
 
 }

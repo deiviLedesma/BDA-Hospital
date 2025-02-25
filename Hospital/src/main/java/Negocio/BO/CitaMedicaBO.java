@@ -40,7 +40,7 @@ public class CitaMedicaBO {
         this.medicoDAO = new MedicoDAO(conexion);
     }
     
-    public boolean agendarCita(CitaAgendadaDTO cita) throws NegocioException{
+    public boolean agendarCita(CitaAgendadaDTO cita, String folio) throws NegocioException{
         if (cita == null){
             throw new NegocioException("La cita no puede ser nula");
         }
@@ -58,7 +58,7 @@ public class CitaMedicaBO {
         }
         CitaMedica citaMedicaMapper = mapper.toEntity(cita);
         try {
-            CitaMedica citaProgramAgendada = citaMedicaDAO.agendarCita(citaMedicaMapper);
+            CitaMedica citaProgramAgendada = citaMedicaDAO.agendarCita(citaMedicaMapper, folio);
             return citaProgramAgendada != null;
         }catch(PersistenciaException ex){
             LOG.log(Level.SEVERE, "Error al agendar la cita en la BD", ex);
@@ -67,7 +67,7 @@ public class CitaMedicaBO {
         
     }
     
-    public boolean agendarCitaEmergencia(CitaNoAgendadaDTO cita) throws NegocioException{
+    public boolean agendarCitaEmergencia(CitaNoAgendadaDTO cita, String folio) throws NegocioException{
         if (cita == null){
             throw new NegocioException("La cita no puede ser nula");
         }
@@ -79,7 +79,7 @@ public class CitaMedicaBO {
         }
         CitaMedica citaMedicaMapper = mapper.toEntityNoAgendado(cita);
         try {
-            CitaMedica citaNoProgramAgendada = citaMedicaDAO.agendarCita(citaMedicaMapper);
+            CitaMedica citaNoProgramAgendada = citaMedicaDAO.agendarCita(citaMedicaMapper, folio);
             return citaNoProgramAgendada != null;
         }catch(PersistenciaException ex){
             LOG.log(Level.SEVERE, "Error al agendar la cita en la BD", ex);

@@ -306,7 +306,8 @@ public class AgendarCitaProgramada extends javax.swing.JFrame {
             LocalTime hora = LGDThoraConsulta.getTime();
             int idPaciente = SesionActual.getIdUsuario();
             CitaAgendadaDTO cita = new CitaAgendadaDTO(valorSeleccionado, idPaciente, fecha, hora);
-            boolean exito = cidaMedicaBO.agendarCita(cita);
+            String folio = null;
+            boolean exito = cidaMedicaBO.agendarCita(cita, folio);
             
             if(exito){
                 JOptionPane.showMessageDialog(this, "Cita agendada correctamente");

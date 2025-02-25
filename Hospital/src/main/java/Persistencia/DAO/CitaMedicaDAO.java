@@ -37,22 +37,18 @@ public class CitaMedicaDAO implements ICitaMedicaDAO{
     
     
     @Override
-    public CitaMedica agendarCita(CitaMedica citaMedica) throws PersistenciaException {
+    public CitaMedica agendarCita(CitaMedica citaMedica, String folio) throws PersistenciaException {
         String consultaSQL = "INSERT INTO citamedica (programada, diaSemana, hora, folio, idPaciente, idMedico) VALUES(?,?,?,?,?,?)";
         
         try(Connection con = conexion.crearConexion();
                 PreparedStatement ps = con.prepareStatement(consultaSQL, Statement.RETURN_GENERATED_KEYS)){
             
-            String folioGenerado = null;
             
-            if(citaMedica.isProgramada()== false){
-                folioGenerado = generarFolio();
-            }
             
             ps.setBoolean(1, citaMedica.isProgramada());
             ps.setDate(2, java.sql.Date.valueOf(citaMedica.getDiaSemana()));
             ps.setTime(3, java.sql.Time.valueOf(citaMedica.getHora()));
-            ps.setString(4, folioGenerado);
+            ps.setString(4, folio);
             ps.setInt(5, citaMedica.getIdPaciente());
             ps.setInt(6, citaMedica.getIdMedico());
             
@@ -102,23 +98,6 @@ public class CitaMedicaDAO implements ICitaMedicaDAO{
         throw new PersistenciaException("Error al hacer la lista de horarios", e);
     }
         return horarios;
-    }
-    
-    
-    
-    
-    
-    
-    
-    public static String generarFolio() {
-        Random random = new Random();
-        StringBuilder folio = new StringBuilder();
-        
-        for (int i = 0; i < 8; i++) {
-            folio.append(random.nextInt(10)); // Genera un número entre 0 y 9
-        }
-        
-        return folio.toString();
     }
 
     
