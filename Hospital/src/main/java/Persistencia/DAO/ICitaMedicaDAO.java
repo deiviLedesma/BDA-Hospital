@@ -17,6 +17,6 @@ public interface ICitaMedicaDAO {
     
     public CitaMedica agendarCita(CitaMedica citaMedica) throws Persistencia.PersistenciaException;
     
-    public List<LocalTime> obtenerHorariosDisponibles (int idMedico, String diaSemana, LocalDate fecha) throws Persistencia.PersistenciaException;
+    public  List<Object[]> obtenerHorariosDisponibles (int idMedico, String diaSemana) throws Persistencia.PersistenciaException;
     
 }

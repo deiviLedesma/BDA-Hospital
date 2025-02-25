@@ -5,6 +5,7 @@
 package Negocio.Mapper;
 
 import Negocio.DTO.CitaAgendadaDTO;
+import Negocio.DTO.CitaNoAgendadaDTO;
 import Persistencia.Entidades.CitaMedica;
 
 /**
@@ -36,6 +37,33 @@ public class CitaMedicaMapper {
             cita.getIdMedico(),
             cita.getIdPaciente(),
             cita.getDiaSemana(),
+            cita.getHora()
+            
+        );
+    }
+    
+    public CitaMedica toEntityNoAgendado (CitaNoAgendadaDTO dto){
+        if(dto == null){
+            return null;
+        }
+        CitaMedica cita = new CitaMedica();
+        cita.setIdMedico(dto.getIdMedico());
+        cita.setIdPaciente(dto.getIdPaciente());
+        cita.setDiaSemana(dto.getDiaSemana());
+        cita.setHora(dto.getHora());
+        cita.setProgramada(dto.isProgramada());
+
+        return cita;
+    }
+    
+    public static CitaNoAgendadaDTO toDTONoAgendado(CitaMedica cita) {
+        if (cita == null) {
+            return null;
+        }
+
+        return new CitaNoAgendadaDTO(
+            cita.getIdMedico(),
+            cita.getIdPaciente(),
             cita.getHora()
             
         );

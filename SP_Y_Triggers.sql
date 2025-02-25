@@ -250,3 +250,63 @@ BEGIN
 END$$
 
 DELIMITER ;
+
+
+
+-- ------------------------------------------------------------------------------------------
+-- Procedimiento para obtener los horarios para la cita de emergencia
+
+DELIMITER $$
+
+CREATE PROCEDURE ObtenerHorariosDisponiblesEmergencia(
+    IN p_idMedico INT,
+    IN p_diaSemana ENUM('lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo')
+)
+BEGIN
+    DECLARE v_horaFin TIME;
+
+    -- Obtener la hora de finalización del médico para el día especificado
+    SELECT horaFin INTO v_horaFin
+    FROM horarios_medicos
+    WHERE idMedico = p_idMedico AND diaSemana = p_diaSemana
+    LIMIT 1;
+
+    -- Si la hora actual ya pasó la hora de fin - 30 min, no devolver horarios
+    IF NOW() >= SUBTIME(v_horaFin, '00:30:00') THEN
+        SELECT NULL AS hora, NULL AS idMedico;
+    ELSE
+    -- Generar los intervalos de 30 minutos y excluir horarios ocupados
+    WITH RECURSIVE intervalos AS (
+        -- Caso base: hora actual
+        SELECT DATE_FORMAT(DATE_ADD(NOW(), INTERVAL 30 - (MINUTE(NOW()) % 30) MINUTE), '%H:%i') AS hora
+        FROM horarios_medicos
+        WHERE idMedico = p_idMedico AND diaSemana = p_diaSemana
+
+        UNION ALL
+
+        -- Caso recursivo: Sumar 30 minutos en cada iteración
+        SELECT ADDTIME(hora, '00:30:00')
+        FROM intervalos
+        WHERE ADDTIME(hora, '00:30:00') <= (
+            SELECT SUBTIME(horaFin,'00:30:00')
+            FROM horarios_medicos 
+            WHERE idMedico = p_idMedico AND diaSemana = p_diaSemana
+        )
+    )
+
+    -- Mostrar solo los horarios disponibles (sin citas programadas)
+    SELECT i.hora, p_idMedico AS idMedico -- Ahora también retorna el idMedico
+    FROM intervalos i
+    WHERE NOT EXISTS (
+        SELECT 1 FROM citaMedica c
+        WHERE c.idMedico = p_idMedico 
+        AND c.diaSemana = curdate()
+        AND c.hora = i.hora
+        AND c.estado = 'PENDIENTE'
+    );
+    END IF;
+
+END$$
+
+DELIMITER ;
+

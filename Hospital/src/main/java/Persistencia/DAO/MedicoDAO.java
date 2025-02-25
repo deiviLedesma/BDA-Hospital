@@ -23,11 +23,12 @@ import java.util.logging.Logger;
 public class MedicoDAO implements IMedicoDAO{
     
     IConexion conexion;
-
+    private static final Logger LOG = Logger.getLogger(MedicoDAO.class.getName());
+    
     public MedicoDAO(IConexion conexion) {
         this.conexion = conexion;
     }
-    private static final Logger LOG = Logger.getLogger(MedicoDAO.class.getName());
+    
     
    
     @Override

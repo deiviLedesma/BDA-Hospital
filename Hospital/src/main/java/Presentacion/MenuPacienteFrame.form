@@ -155,6 +155,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cita de Emergencia"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEmergenciaActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnPerfil">
           <Properties>

@@ -5,15 +5,21 @@
 package Negocio.BO;
 
 import Negocio.DTO.CitaAgendadaDTO;
+import Negocio.DTO.CitaNoAgendadaDTO;
+import Negocio.DTO.MedicoDTOViejo;
 import Negocio.Exception.NegocioException;
 import Negocio.Mapper.CitaMedicaMapper;
 import Persistencia.Conexion.IConexion;
 import Persistencia.DAO.CitaMedicaDAO;
 import Persistencia.DAO.ICitaMedicaDAO;
+import Persistencia.DAO.IMedicoDAO;
+import Persistencia.DAO.MedicoDAO;
 import Persistencia.Entidades.CitaMedica;
+import Persistencia.Entidades.Medico;
 import Persistencia.PersistenciaException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,10 +31,13 @@ import java.util.logging.Logger;
 public class CitaMedicaBO {
     private static final Logger LOG = Logger.getLogger(CitaMedicaBO.class.getName());
     private final ICitaMedicaDAO citaMedicaDAO;
+    private final IMedicoDAO medicoDAO;
     private final CitaMedicaMapper mapper = new CitaMedicaMapper();
+    
 
     public CitaMedicaBO(IConexion conexion) {
         this.citaMedicaDAO = new CitaMedicaDAO(conexion);
+        this.medicoDAO = new MedicoDAO(conexion);
     }
     
     public boolean agendarCita(CitaAgendadaDTO cita) throws NegocioException{
@@ -58,15 +67,32 @@ public class CitaMedicaBO {
         
     }
     
-    public List<LocalTime> obtenerHorariosDisponibles (int idMedico, LocalDate fecha) throws NegocioException{
-        
-        if (fecha == null){
-            throw new NegocioException("Ingrese una fecha porfavor");
+    public boolean agendarCitaEmergencia(CitaNoAgendadaDTO cita) throws NegocioException{
+        if (cita == null){
+            throw new NegocioException("La cita no puede ser nula");
         }
-        if (fecha.isBefore(LocalDate.now())) {
-            throw new NegocioException("No puedes agendar citas en fechas pasadas.");
+        if (cita.getIdMedico() <= 0) {
+            throw new NegocioException("El ID del médico no es válido.");
         }
-        String diaSemana = fecha.getDayOfWeek().name().toLowerCase();
+        if (cita.getIdPaciente() <= 0) {
+            throw new NegocioException("El ID del paciente no es válido.");
+        }
+        CitaMedica citaMedicaMapper = mapper.toEntityNoAgendado(cita);
+        try {
+            CitaMedica citaNoProgramAgendada = citaMedicaDAO.agendarCita(citaMedicaMapper);
+            return citaNoProgramAgendada != null;
+        }catch(PersistenciaException ex){
+            LOG.log(Level.SEVERE, "Error al agendar la cita en la BD", ex);
+            throw new NegocioException("Hubo un error al agendar la cita.", ex);
+        }
+    }
+    
+    
+    
+    
+    public Object[] obtenerHorariosDisponibles (List<MedicoDTOViejo> medicos) throws NegocioException{
+        List<Object[]> mejoresHorarios = new ArrayList<>();
+        String diaSemana = LocalDate.now().getDayOfWeek().name().toLowerCase();
         if (null != diaSemana)switch (diaSemana) {
             case "monday" -> diaSemana = "lunes";
             case "tuesday" -> diaSemana = "martes";
@@ -79,7 +105,20 @@ public class CitaMedicaBO {
             }
         }
         try{
-        return citaMedicaDAO.obtenerHorariosDisponibles(idMedico, diaSemana, fecha);
+            for (MedicoDTOViejo medico : medicos) {
+                List<Object[]> horariosConID = citaMedicaDAO.obtenerHorariosDisponibles(medico.getIdMedico(),diaSemana);
+                if (!horariosConID.isEmpty()) {
+                    Object[] primerElemento = horariosConID.get(0);
+                    
+                    if (primerElemento[0] != null && (int) primerElemento[1] != 0) {
+                        mejoresHorarios.add(horariosConID.get(0));
+                    }
+                }
+            }
+            mejoresHorarios.sort((o1, o2) ->
+                    LocalTime.parse((String) o1[0]).compareTo(LocalTime.parse((String) o2[0]))
+            );
+            return mejoresHorarios.get(0);
         }catch(PersistenciaException ex) {
             LOG.log(Level.SEVERE, "Error al acceder a la base de datos", ex);
             throw new NegocioException("Error al obtener horarios. Intente más tarde.", ex);

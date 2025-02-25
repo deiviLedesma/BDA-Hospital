@@ -73,6 +73,11 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
 
         btnEmergencia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEmergencia.setText("Cita de Emergencia");
+        btnEmergencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmergenciaActionPerformed(evt);
+            }
+        });
 
         btnPerfil.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnPerfil.setText("Mi Perfil");
@@ -172,6 +177,12 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
         this.dispose();
         mpf.setVisible(true);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnEmergenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmergenciaActionPerformed
+        AgendarCitaEmergencia ace = new AgendarCitaEmergencia();
+        this.dispose();
+        ace.setVisible(true);
+    }//GEN-LAST:event_btnEmergenciaActionPerformed
     /**
      * @param args the command line arguments
      */

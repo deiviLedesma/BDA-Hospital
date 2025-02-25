@@ -79,19 +79,22 @@ public class CitaMedicaDAO implements ICitaMedicaDAO{
     }
     
     @Override
-    public List<LocalTime> obtenerHorariosDisponibles(int idMedico, String diaSemana, LocalDate fecha) throws PersistenciaException {
-        List<LocalTime> horarios = new ArrayList<>();
-        String consultaSQL = "{CALL ObtenerHorariosDisponibles(?, ?, ?)}";
+    public  List<Object[]> obtenerHorariosDisponibles(int idMedico, String diaSemana) throws PersistenciaException {
+         List<Object[]> horarios = new ArrayList<>();
+        String consultaSQL = "{CALL ObtenerHorariosDisponiblesEmergencia(?,?)}";
 
         try (Connection con = this.conexion.crearConexion();
                 CallableStatement cs = con.prepareCall(consultaSQL)) {
             cs.setInt(1, idMedico);
             cs.setString(2, diaSemana);
-            cs.setDate(3, java.sql.Date.valueOf(fecha));
+            
 
             try (ResultSet rs = cs.executeQuery()) {
                 while (rs.next()) {
-                    horarios.add(rs.getTime("hora").toLocalTime()); // Agrega cada horario disponible
+                    
+                    String horaStr = rs.getString("hora"); // Obtener la hora
+                    int idMedicoResultado = rs.getInt("idMedico"); // Obtener el id del médico
+                    horarios.add(new Object[]{horaStr, idMedicoResultado}); // Agrega cada horario disponible
                 }
             }
         }catch (SQLException e) {

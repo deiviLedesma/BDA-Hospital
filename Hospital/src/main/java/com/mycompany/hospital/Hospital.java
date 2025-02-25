@@ -27,6 +27,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.List;
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -189,12 +190,33 @@ public class Hospital {
 //        System.out.println(pacienteActualizado);
 
 ////      Buscar horarios disponibles de un doctor a nivel persistencia FUNCIONA
-//        List<LocalTime> horariosDisponibles = citaMedicaDAO.obtenerHorariosDisponibles(5, "jueves", LocalDate.of(2025, 02, 27));
-//        System.out.println(horariosDisponibles);
+//        LocalDate fecha = LocalDate.now();
+//        String diaSemana = fecha.getDayOfWeek().name().toLowerCase();
+//        if (null != diaSemana)switch (diaSemana) {
+//            case "monday" -> diaSemana = "lunes";
+//            case "tuesday" -> diaSemana = "martes";
+//            case "wednesday" -> diaSemana = "miércoles";
+//            case "thursday" -> diaSemana = "jueves";
+//            case "friday" -> diaSemana = "viernes";
+//            case "saturday" -> diaSemana = "sábado";
+//            case "sunday" -> diaSemana = "domingo";
+//            default -> {
+//            }
+//        }
+//        List<Object[]> horariosDisponibles = citaMedicaDAO.obtenerHorariosDisponibles(1, diaSemana);
+//        for (Object[] horario : horariosDisponibles) {
+//            System.out.println(Arrays.toString(horario));
+//        }
             
 ////      Buscar horarios disponibles de un doctor a nivel negocio FUNCIONA
-//        List<LocalTime> horariosDisponibles = citaMedicaBO.obtenerHorariosDisponibles(5, LocalDate.of(2025, 02, 27));
-//        System.out.println(horariosDisponibles);
+//        List<Object[]> horariosDisponibles = citaMedicaBO.obtenerHorariosDisponibles(11, LocalDate.of(2025, 02, 27));
+//        for (Object[] horariosDisponible : horariosDisponibles) {
+//            System.out.println(Arrays.toString(horariosDisponible));
+//        }
+
+////      Ayuda
+//        System.out.println(Arrays.toString(citaMedicaBO.agendarCitaEmergencia("Cardiología")));
+
 
     }    
 }
