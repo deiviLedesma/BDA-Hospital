@@ -4,6 +4,17 @@
  */
 package Negocio.BO;
 
+import Negocio.DTO.ConsultaDTO;
+import Negocio.Exception.NegocioException;
+import Negocio.Mapper.ConsultaMapper;
+import Persistencia.Conexion.IConexion;
+import Persistencia.DAO.ConsultaDAO;
+import Persistencia.DAO.IConsultaDAO;
+import Persistencia.Entidades.Consulta;
+import Persistencia.PersistenciaException;
+import java.time.LocalDate;
+import java.util.logging.Logger;
+
 /**
  *
  * @author SDavidLedesma
@@ -20,13 +31,8 @@ public class ConsultaBO {
     public boolean registrarConsulta(ConsultaDTO consulta) throws PersistenciaException, NegocioException {
         validarConsulta(consulta);
         Consulta consultaMapper = mapper.toEntity(consulta);
-        try {
-            Consulta ConsultaAgregada = consultaDAO.agregarCOnsulta(consultaMapper);
-            return ConsultaAgregada != null;
-        }catch(PersistenciaException ex){
-            LOG.log(Level.SEVERE, "Error al agendar la cita en la BD", ex);
-            throw new NegocioException("Hubo un error al agendar la cita.", ex);
-        }
+        Consulta ConsultaAgregada = consultaDAO.agregarCOnsulta(consultaMapper);
+        return ConsultaAgregada != null;
         
     }
 
