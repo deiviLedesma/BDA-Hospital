@@ -4,11 +4,26 @@
  */
 package Presentacion;
 
+import Negocio.BO.CitaMedicaBO;
+import Negocio.Exception.NegocioException;
+import Negocio.configuracion.DependencyInjector;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author SDavidLedesma
  */
 public class CitasDoctorFrame extends javax.swing.JFrame {
+
+    int idMedico = SesionActual.getIdMedico();
+    CitaMedicaBO citaMedicaBO = DependencyInjector.crearCitaMedicaBO();
+    String[] columnas = {"Paciente", "Estado", "Tipo", "Fecha", "Hora", "Folio"};
+    DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
 
     /**
      * Creates new form CitasDoctorFrame
@@ -35,41 +50,7 @@ public class CitasDoctorFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tablaCitas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Paciente", "Estado", "Tipo", "Fecha y Hora", "Folio"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        tablaCitas.setModel(modelo);
         jScrollPane1.setViewportView(tablaCitas);
 
         btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -114,7 +95,7 @@ public class CitasDoctorFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        MenuDoctorFrame  mdf = new MenuDoctorFrame();
+        MenuDoctorFrame mdf = new MenuDoctorFrame();
         this.dispose();
         mdf.setVisible(true);
     }//GEN-LAST:event_btnVolverActionPerformed
@@ -152,6 +133,22 @@ public class CitasDoctorFrame extends javax.swing.JFrame {
                 new CitasDoctorFrame().setVisible(true);
             }
         });
+    }
+
+    private List<String[]> obtenerCitasPendientes() {
+        try {
+            List<String[]> citas = citaMedicaBO.citasMedicos(idMedico);
+            return citas.stream().
+                    filter(cita -> "PENDIENTE".equalsIgnoreCase(cita[6]))
+                    .collect(Collectors.toList());// 6 = estado
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(this, "Error" + e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+
+        } catch (Exception ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error inesperado", ex);
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado. Intente nuevamente", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

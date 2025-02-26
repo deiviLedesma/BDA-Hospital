@@ -37,6 +37,8 @@ public class AgendarCitaProgramada extends javax.swing.JFrame {
      */
     public AgendarCitaProgramada() {
         initComponents();
+        this.setResizable(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -84,9 +86,9 @@ public class AgendarCitaProgramada extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 102));
 
+        jLabel1.setText("Agendar Cita");
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Agendar Cita");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -190,7 +192,7 @@ public class AgendarCitaProgramada extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
+                .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel2)
@@ -208,7 +210,7 @@ public class AgendarCitaProgramada extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(btAgendarCita))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         pack();
@@ -296,6 +298,7 @@ public class AgendarCitaProgramada extends javax.swing.JFrame {
                 List<String> nombresMedicos = Arrays.asList(medico.getNombre(),medico.getApellidoPaterno(),medico.getApellidoMaterno());
                 String nombreCompleto = String.join(" ", nombresMedicos);
                 modelo.addRow(new Object[]{medico.getIdMedico(),nombreCompleto});
+                
             }
         }
     }

@@ -139,6 +139,20 @@ public class CitaMedicaBO {
         }
     }
     
+    public List<String[]> citasMedicos (int idMedico) throws NegocioException{
+        List<String[]> citas = new ArrayList<>();
+        if (idMedico <= 0) {
+            throw new  NegocioException("id de Medico no válida");
+        }
+        try{
+            citas = citaMedicaDAO.obtenerCitasMedicos(idMedico);
+            return citas;
+        }catch(PersistenciaException ex){
+            LOG.log(Level.SEVERE, "Error al acceder a la base de datos", ex);
+            throw new NegocioException("Erro al obtener citas. Intente más tarde", ex);
+        }
+    }
+    
     
     
     

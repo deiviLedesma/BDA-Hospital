@@ -33,6 +33,8 @@ public class AgendarCitaEmergencia extends javax.swing.JFrame {
      */
     public AgendarCitaEmergencia() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**
