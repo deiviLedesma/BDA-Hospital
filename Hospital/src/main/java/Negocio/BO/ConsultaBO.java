@@ -23,11 +23,20 @@ public class ConsultaBO {
    private final IConsultaDAO consultaDAO;
     private static final Logger LOG = Logger.getLogger(ConsultaBO.class.getName());
     private ConsultaMapper mapper = new ConsultaMapper();
-
+    /**
+     * constructor de la consulta que conecta con la base de datos
+     * @param conexion conexion con la base de datos
+     */
     public ConsultaBO(IConexion conexion) {
         this.consultaDAO = new ConsultaDAO(conexion);
     }
-
+    /**
+     * metod que manda la consulta a que se agrege en la capa de persistencia
+     * @param consulta  consulta a agregar
+     * @return regresa el resultado de la agregacion, verdadero si se agrego, falso en caso contrario
+     * @throws PersistenciaException
+     * @throws NegocioException 
+     */
     public boolean registrarConsulta(ConsultaDTO consulta) throws PersistenciaException, NegocioException {
         validarConsulta(consulta);
         Consulta consultaMapper = mapper.toEntity(consulta);
@@ -35,14 +44,24 @@ public class ConsultaBO {
         return ConsultaAgregada != null;
         
     }
-
+    /**
+     * metodo que obtiene una consulta por el id
+     * @param idConsulta consulta la cual queremos obtener
+     * @return  regresa la consulta que estamos buscando
+     * @throws PersistenciaException 
+     */
     public Consulta obtenerConsultaPorId(int idConsulta) throws PersistenciaException {
         if (idConsulta <= 0) {
             throw new PersistenciaException("El ID de la consulta debe ser mayor a 0.");
         }
         return consultaDAO.obtenerConsultaPorId(idConsulta);
     }
-
+    /**
+     * metodo que valida las consultas antes de ser agregadas
+     * @param consulta  consulta antes de ser validada
+     * @throws Negocio.Exception.NegocioException
+     * @throws PersistenciaException 
+     */
     private void validarConsulta(ConsultaDTO consulta)throws Negocio.Exception.NegocioException, PersistenciaException {
         if (consulta == null) {
             throw new PersistenciaException("La consulta no puede ser nula.");

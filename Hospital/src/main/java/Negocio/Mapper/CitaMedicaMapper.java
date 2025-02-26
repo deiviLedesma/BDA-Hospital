@@ -13,6 +13,11 @@ import Persistencia.Entidades.CitaMedica;
  * @author rodri
  */
 public class CitaMedicaMapper {
+    /**
+     * metodo que transforma una citadto a una cita
+     * @param dto cita a transformar
+     * @return regresa la cita ya transformada
+     */
     public CitaMedica toEntity (CitaAgendadaDTO dto){
         if(dto == null){
             return null;
@@ -27,7 +32,11 @@ public class CitaMedicaMapper {
         return cita;
     }
     
-    // Convierte de Entidad a DTO
+   /**
+     * Convierte de Entidad a DTO
+     * @param cita cita a transformar
+     * @return regresa la cita ya transformada
+     */
     public static CitaAgendadaDTO toDTO(CitaMedica cita) {
         if (cita == null) {
             return null;
@@ -41,7 +50,11 @@ public class CitaMedicaMapper {
             
         );
     }
-    
+    /**
+     * metodo que convierte una cita no agendada a cita medica
+     * @param dto cita a transformar
+     * @return 
+     */
     public CitaMedica toEntityNoAgendado (CitaNoAgendadaDTO dto){
         if(dto == null){
             return null;
@@ -55,7 +68,11 @@ public class CitaMedicaMapper {
 
         return cita;
     }
-    
+    /**
+     * metodo que transforma una cita a una citaNoAgendadaDTO
+     * @param cita cita a transformar
+     * @return regresa la cita ya trasformada
+     */
     public static CitaNoAgendadaDTO toDTONoAgendado(CitaMedica cita) {
         if (cita == null) {
             return null;

@@ -31,11 +31,19 @@ public class MedicoBO {
     private static final Logger LOG = Logger.getLogger(MedicoBO.class.getName());
     private final IMedicoDAO medicoDAO;
     private MedicoMapper mapper = new MedicoMapper();
-
+    /**
+     * constructor que conecta con la base de datos
+     * @param conexion conexion con la base de datos
+     */
     public MedicoBO(IConexion conexion) {
         this.medicoDAO = new MedicoDAO(conexion);
     }
-    
+    /**
+     * metodo que valida y llama a la capa de persistencia para dar de baja a un medico
+     * @param id id del medico a dar de baja
+     * @return  verdadero si se dio de baja y falso si no 
+     * @throws NegocioException 
+     */
     public boolean eliminarMedico(int id) throws NegocioException{
         if(id<0){
             throw new NegocioException("El ID debe ser un número válido.");        }
@@ -46,17 +54,31 @@ public class MedicoBO {
             throw new NegocioException("No se pudo dar de baja al medico", ex);
         }
     }
-    
+    /**
+     * metodo regresa una lista con todos los medicos 
+     * @return regresa una lista con todos los medicos registrados
+     * @throws NegocioException 
+     */
     public List<MedicoDTOViejo> obtenerTodos() throws NegocioException {
         List<Medico> listaMedicos = medicoDAO.consultarTodosMedicos();
         return mapper.toDTOViejoList(listaMedicos);
     }
-    
+    /**
+     * metodo que regresa una lista con todos los medicos con la especialidad del parametro
+     * @param especialidad especialidad a filtrar los medicos
+     * @return regresa una lista de medicos
+     * @throws NegocioException 
+     */
     public List<MedicoDTOViejo> obtenerXEspecialidad(String especialidad) throws NegocioException {
         List<Medico> listaMedicos = medicoDAO.consultarPorEspecialidad(especialidad);
         return mapper.toDTOViejoList(listaMedicos);
     }
-    
+    /**
+     * metodo que valida el medico en la base de datos ademas de la contrasenia
+     * @param medicoDTOinicioSesion medico a validar 
+     * @return regresa un medicoDTO si se encontro el medico
+     * @throws NegocioException 
+     */
     public MedicoDTOViejo validarUsuario (MedicoDTOInicioSesion medicoDTOinicioSesion) throws NegocioException{
         try{
             Medico medico = medicoDAO.buscarMedicoPorCedula(medicoDTOinicioSesion.getCedulaProfesional());
@@ -74,7 +96,12 @@ public class MedicoBO {
     }
     
     
-    //Para verificar que la contrasenia ingresada y la hasheada coinciden (usar en el inicio de sesion)
+    /**
+     * metodo para verificar que la contrasenia ingresada y la hasheada coinciden (usar en el inicio de sesion)
+     * @param contrasenia contrasenia del medico
+     * @param contraseniaHasheada contrasenia hasheada
+     * @return regresa true si la contraseña es correcta, false en caso contrario
+     */
     private static boolean checarContrasenia(String contrasenia, String contraseniaHasheada) {
         return BCrypt.checkpw(contrasenia, contraseniaHasheada);
     }

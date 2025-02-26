@@ -328,3 +328,16 @@ BEGIN
 END $$
 DELIMITER ;
 
+-- ver las citas del paciente 
+DELIMITER $$
+
+CREATE PROCEDURE verCitasPaciente (in p_id int)
+BEGIN
+	SELECT c.idCita, c.programada, c.diaSemana, c.hora, c.folio, c.estado, m.especialidad, concat(m.nombre," ",m.apellidoPaterno," ",m.apellidoMaterno) as medico
+	FROM citamedica c
+	JOIN medicos m on c.idMedico = m.idMedico
+	WHERE idPaciente = 8;
+END $$
+
+DELIMITER ;
+

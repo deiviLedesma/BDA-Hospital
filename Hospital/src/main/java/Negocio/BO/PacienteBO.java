@@ -35,7 +35,12 @@ public class PacienteBO {
     }
 
     
-    
+    /**
+     * metodo que valida al paciente para luego agregarlo a la base de datos
+     * @param paciente paciente a ser agregado 
+     * @return regresa true si se agrego correctamente, falso en caso contrario
+     * @throws NegocioException 
+     */
     public boolean agregarPaciente(PacienteDTONuevo paciente)throws NegocioException {
         if(paciente == null){
             throw new NegocioException("El paciente no puede ser nulo.");
@@ -57,7 +62,12 @@ public class PacienteBO {
         }
        
     }
-    
+    /**
+     * motodo que obtiene a todos los pacientes segun el nombre del parametro
+     * @param nombre nombre de los pacientes a buscar
+     * @return regresa una lista con los pacientes que cumplan con el parametro
+     * @throws NegocioException 
+     */
     public List<PacienteDTOViejo> obtenerPorNombre(String nombre) throws NegocioException{
         try{
             List<Paciente> pacientes = pacienteDAO.buscarPacientePorNombre(nombre);
@@ -70,12 +80,21 @@ public class PacienteBO {
             throw new NegocioException("No se pudo obtener la lista de activistas.", ex);
         }
     }
-    
+    /**
+     * metodo que obtiene a todos los pacientes
+     * @return regresa una lista con todos los pacientes
+     * @throws NegocioException 
+     */
     public List<PacienteDTOViejo> obtenerTodosPacientes() throws NegocioException{
         List<Paciente> pacientes = pacienteDAO.MostrarTodosLosPacientes();
         return mapper.toDTOViejoList(pacientes);
     }
-    
+    /**
+     * metodo que valida al usuario con su contrasenia 
+     * @param pacienteDTOinicioSesion el paciente a validar
+     * @return regresa el paciente convertido a pacienteDTOViejo
+     * @throws NegocioException 
+     */
     public PacienteDTOViejo validarUsuario (PacienteDTOInicioSesion pacienteDTOinicioSesion) throws NegocioException{
         try{
             Paciente paciente = pacienteDAO.buscarPacientePorCorreo(pacienteDTOinicioSesion.getCorreo());
@@ -91,7 +110,13 @@ public class PacienteBO {
             throw new NegocioException("Error al validar el usuario. Intente más tarde.", ex);
         }
     }
-    
+    /**
+     * metodo que actualiza la informacion del cliente
+     * @param idPaciente paciente a actualizar
+     * @param paciente el paciente con los nuevos datos seleccionados
+     * @return regresa true si se actualizo el paciente, false caso contrario
+     * @throws NegocioException 
+     */
     public boolean actualizarPaciente (int idPaciente, PacienteDTONuevo paciente) throws NegocioException{
         if(idPaciente <= 0){
             throw new NegocioException("El id no es valido");
@@ -132,11 +157,20 @@ public class PacienteBO {
     }
     
     
-    //Para verificar que la contrasenia ingresada y la hasheada coinciden (usar en el inicio de sesion)
+    /**
+     * Para verificar que la contrasenia ingresada y la hasheada coinciden (usar en el inicio de sesion)
+     * @param contrasenia contrasenia a validar
+     * @param contraseniaHasheada contrasenia hasheada con la cual se compara
+     * @return regresa true si la contrasenia es correcta
+     */
     private static boolean checarContrasenia(String contrasenia, String contraseniaHasheada) {
         return BCrypt.checkpw(contrasenia, contraseniaHasheada);
     }
-    
+    /**
+     * metodo que le da formato al nombre de los pacientes
+     * @param nombre nombre del paciente
+     * @return regresa el nombre del paciente con el formato
+     */
     private String formatoNombre(String nombre) {
     nombre = nombre.trim().toLowerCase(); // Convertir todo a minúsculas
     return nombre.substring(0, 1).toUpperCase() + nombre.substring(1); // Primera letra mayúscula

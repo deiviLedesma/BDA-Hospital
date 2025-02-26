@@ -30,7 +30,13 @@ public class HistorialDAO {
     private static final Logger LOG = Logger.getLogger(HistorialDAO.class.getName());
 
  
-
+    /**
+     * metodo que obtiene el historial de los pacientes
+     * @param idPaciente id del paciente del cual queremos saber le historial
+     * @return  una lista con todas las consultas del paciente
+     * @throws SQLException
+     * @throws PersistenciaException 
+     */
     public List<ConsultaDTO> obtenerHistorial(int idPaciente) throws SQLException, PersistenciaException {
         List<ConsultaDTO> historial = new ArrayList<>();
         String sql = "SELECT idConsulta, fechaConsulta, diagnostico  FROM Consulta WHERE idCita = ?";

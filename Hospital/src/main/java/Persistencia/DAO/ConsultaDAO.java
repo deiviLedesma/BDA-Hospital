@@ -27,7 +27,12 @@ public class ConsultaDAO implements IConsultaDAO{
     public ConsultaDAO(IConexion conexion) {
         this.conexion = conexion;
     }
-    
+    /**
+     * metodo para agregar una consulta
+     * @param consulta consulta a agregar 
+     * @return regresa la consulta agregada
+     * @throws PersistenciaException 
+     */
     @Override
     public Consulta agregarCOnsulta(Consulta consulta)throws PersistenciaException {
         String consultaSQL = "insert into consulta(fechaConsulta, diagnostico, tratamiento, idCita) values(?,?,?,?);";
@@ -60,7 +65,12 @@ public class ConsultaDAO implements IConsultaDAO{
                 throw new PersistenciaException("la creacion de la consulta fallo no se inserto ninguna fila");
         }
     }
-
+    /**
+     * metodo que obtiene una consulta por su id
+     * @param idConsulta id de la consulta a buscar
+     * @return regresa la consulta que buscamos
+     * @throws PersistenciaException 
+     */
     @Override
     public Consulta obtenerConsultaPorId(int idConsulta) throws PersistenciaException {
         Consulta consulta = null;

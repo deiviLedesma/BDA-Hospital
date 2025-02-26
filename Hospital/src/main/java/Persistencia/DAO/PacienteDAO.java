@@ -32,7 +32,12 @@ public class PacienteDAO implements IPacienteDAO {
     public PacienteDAO(IConexion conexion) {
         this.conexion = conexion;
     }
-
+    /**
+     * metodo que agreaga un paciente a la base de datos
+     * @param paciente paciente a agregar a la base 
+     * @return regresa el paciente agregado
+     * @throws PersistenciaException 
+     */
     @Override
     public Paciente agregarPaciente(Paciente paciente) throws PersistenciaException {
         String consultaSQL = "INSERT INTO pacientes(nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, correoElectronico, telefono, contrasenia, calle, colonia, numero) VALUES(?,?,?,?,?,?,?,?,?,?)";
@@ -73,7 +78,12 @@ public class PacienteDAO implements IPacienteDAO {
             throw new PersistenciaException("la creacion del paciente fallo no se inserto ninguna fila");
         }
     }
-
+    /**
+     * metodo que busca todos los pacientes que coincidan con el parametro en la base de datos
+     * @param nombre nombre del paciente que buscamos
+     * @return  regresa una lista de pacientes
+     * @throws PersistenciaException 
+     */
     @Override
     public List<Paciente> buscarPacientePorNombre(String nombre) throws PersistenciaException {
         List<Paciente> pacientes = new ArrayList<>();
@@ -108,7 +118,10 @@ public class PacienteDAO implements IPacienteDAO {
     }
         return pacientes;
     }
-
+    /**
+     * metodo que agrupa todos los pacientes en la base de datos en una lista 
+     * @return regresa una lista con todos los pacientes
+     */
     @Override
     public List<Paciente> MostrarTodosLosPacientes() {
      List<Paciente> pacientes = new ArrayList<>();
@@ -148,7 +161,12 @@ public class PacienteDAO implements IPacienteDAO {
         }
         return pacientes;
     }
-    
+    /**
+     * metodo que busca a un paciente por su correo en la base de datos
+     * @param correo correo por el cual buscamos al paciente 
+     * @return regresa el paciente con el cual coincide el correo 
+     * @throws PersistenciaException 
+     */
     @Override
     public Paciente buscarPacientePorCorreo(String correo) throws PersistenciaException {
         Paciente paciente = null;
@@ -184,7 +202,13 @@ public class PacienteDAO implements IPacienteDAO {
     }
         return paciente;
     }
-    
+    /**
+     * metodo que actualiza el paciente en la base
+     * @param idPaciente paciente que se desea actualizar
+     * @param paciente paciente con los nuevos datos a actualizar
+     * @return regresa verdadero si se agrego el paciente
+     * @throws PersistenciaException 
+     */
     @Override
     public boolean actualizarPaciente(int idPaciente, Paciente paciente) throws PersistenciaException {
         
@@ -214,14 +238,22 @@ public class PacienteDAO implements IPacienteDAO {
             throw new PersistenciaException("Error al actualizar el Paciente");
         }
     }
-    
-    //Para encriptar la contrasenia
+    /**
+     * metodo para encriptar la contrasenia
+     * @param contrasenia contrasenia a hashear
+     * @return 
+     */
     private static String hashearContrasenia(String contrasenia) {
         return BCrypt.hashpw(contrasenia, BCrypt.gensalt(10));
     }
     
     
-    //Para verificar que la contrasenia ingresada y la hasheada coinciden (usar en el inicio de sesion)
+    /**
+     * metodo para verificar que la contrasenia ingresada y la hasheada coinciden (usar en el inicio de sesion)
+     * @param contrasenia contrasenia a validar
+     * @param contraseniaHasheada contrasenia hasheada con la cual se compara con contrasenia
+     * @return regresa true si la contra es correcta
+     */
     private static boolean checarContrasenia(String contrasenia, String contraseniaHasheada) {
         return BCrypt.checkpw(contrasenia, contraseniaHasheada);
     }
