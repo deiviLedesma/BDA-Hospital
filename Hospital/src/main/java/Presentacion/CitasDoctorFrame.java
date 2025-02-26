@@ -32,6 +32,7 @@ public class CitasDoctorFrame extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        cargarCitasPendientesEnTabla();
     }
 
     /**
@@ -151,6 +152,44 @@ public class CitasDoctorFrame extends javax.swing.JFrame {
         return null;
     }
 
+    private void cargarCitasPendientesEnTabla() {
+        List<String[]> citasPendientes = obtenerCitasPendientes();
+        if (citasPendientes != null) {
+            // Limpia el modelo por si tuviera datos previos
+            modelo.setRowCount(0);
+
+            // Por cada arreglo de Strings en la lista, agregas una fila
+            for (String[] cita : citasPendientes) {
+                // Ojo con el orden de los índices.
+                // Tu tabla tiene columnas: "Paciente", "Estado", "Tipo", "Fecha", "Hora", "Folio"
+                // Asegúrate de poner en cada columna el dato correcto. Ejemplo:
+                // Paciente -> cita[x]
+                // Estado   -> cita[y]
+                // Tipo     -> cita[z]
+                // Fecha    -> cita[w]
+                // Hora     -> cita[u]
+                // Folio    -> cita[v]
+
+                // Supongamos que en tu arreglo `cita`, los índices son:
+                // 0 -> idCita
+                // 1 -> diaSemana (fecha)
+                // 2 -> hora
+                // 3 -> folio
+                // 4 -> estado
+                // 5 -> paciente
+                // 6 -> tipo
+                // Entonces para llenar la fila podrías hacer algo así:
+                modelo.addRow(new Object[]{
+                    cita[5], // Paciente
+                    cita[4], // Estado
+                    cita[6], // Tipo
+                    cita[1], // Fecha (diaSemana)
+                    cita[2], // Hora
+                    cita[3] // Folio
+                });
+            }
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCita;
     private javax.swing.JButton btnVolver;

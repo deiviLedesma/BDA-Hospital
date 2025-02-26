@@ -20,10 +20,12 @@ import javax.swing.table.DefaultTableModel;
  * @author SDavidLedesma
  */
 public class CitasPaciente extends javax.swing.JFrame {
+
     int idPaciente = SesionActual.getIdUsuario();
     CitaMedicaBO citaMedicaBO = DependencyInjector.crearCitaMedicaBO();
-    String[] columnas = {"Medico","Especialidad","Tipo","Fecha","Hora","Folio","Estado"};
+    String[] columnas = {"Medico", "Especialidad", "Tipo", "Fecha", "Hora", "Folio", "Estado"};
     DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+
     /**
      * Creates new form CitasPaciente
      */
@@ -182,16 +184,15 @@ public class CitasPaciente extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    
     private List<String[]> obtenerCitasPendientes() {
-        try{
-        List<String[]> citas = citaMedicaBO.citasPaciente(idPaciente);
-        
-        return citas.stream()
-                .filter(cita -> "PENDIENTE".equalsIgnoreCase(cita[6])) // 6 = Estado
-                .collect(Collectors.toList());
-        
-        } catch(NegocioException e) {
+        try {
+            List<String[]> citas = citaMedicaBO.citasPaciente(idPaciente);
+
+            return citas.stream()
+                    .filter(cita -> "PENDIENTE".equalsIgnoreCase(cita[6])) // 6 = Estado
+                    .collect(Collectors.toList());
+
+        } catch (NegocioException e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
         } catch (Exception ex) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error inesperado", ex);
@@ -199,6 +200,5 @@ public class CitasPaciente extends javax.swing.JFrame {
         }
         return null;
     }
-    
-    
+
 }
