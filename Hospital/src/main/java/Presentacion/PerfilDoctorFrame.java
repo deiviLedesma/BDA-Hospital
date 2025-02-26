@@ -4,11 +4,22 @@
  */
 package Presentacion;
 
+import Negocio.BO.MedicoBO;
+import Negocio.BO.PacienteBO;
+import Negocio.DTO.MedicoDTOViejo;
+import Negocio.DTO.PacienteDTOViejo;
+import Negocio.Exception.NegocioException;
+import Negocio.configuracion.DependencyInjector;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author SDavidLedesma
  */
 public class PerfilDoctorFrame extends javax.swing.JFrame {
+    
+        private final MedicoBO medicoBO = DependencyInjector.crearMedicoBO();
 
     /**
      * Creates new form PerfilDoctorFrame
@@ -17,6 +28,7 @@ public class PerfilDoctorFrame extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         this.setLocationRelativeTo(null);
+        mostrarDatosDoctor();
     }
 
     /**
@@ -196,6 +208,37 @@ public class PerfilDoctorFrame extends javax.swing.JFrame {
         pbf.setVisible(true);
     }//GEN-LAST:event_btnBajaTempActionPerformed
 
+    private void mostrarDatosDoctor() {
+        try {
+            // Se asume que en el inicio de sesión se guardó el id del paciente
+            int idMedico = SesionActual.getIdMedico();
+
+            // Se obtiene la lista completa de pacientes
+            List<MedicoDTOViejo> medicos = medicoBO.obtenerTodos();
+
+            // Se filtra el paciente cuyo id coincide con el almacenado en sesión.
+            // Es necesario que PacienteDTOViejo tenga un método getId() para identificarlo.
+            MedicoDTOViejo medico = medicos.stream()
+                    .filter(p -> p.getIdMedico() == idMedico)
+                    .findFirst().orElse(null);
+
+            if (medico != null) {
+                txtNombre.setText(medico.getNombre());
+                txtApellidoPaterno.setText(medico.getApellidoPaterno());
+                txtApellidoMaterno.setText(medico.getApellidoMaterno());
+                txtCedulaProdesional.setText(medico.getCedulaProfesional());
+                txtEspecialidad.setText(medico.getEspecialidad());
+                
+            } else {
+                txtNombre.setText("Doctor no encontrado");
+            }
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

@@ -4,20 +4,31 @@
  */
 package Presentacion;
 
+import Negocio.BO.PacienteBO;
+import Negocio.DTO.PacienteDTOViejo;
+import Negocio.Exception.NegocioException;
+import Negocio.configuracion.DependencyInjector;
+import java.util.List;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author SDavidLedesma
  */
 public class PerfilPacienteFrm extends javax.swing.JFrame {
 
-    
+    private final PacienteBO pacienteBO = DependencyInjector.crearPacienteBO();
+
+    SesionActual actual;
+
     /**
      * Creates new form PerfilPacienteFrm
      */
-    public PerfilPacienteFrm()  {
+    public PerfilPacienteFrm() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        mostrarDatosPaciente();
     }
 
     /**
@@ -212,6 +223,7 @@ public class PerfilPacienteFrm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
         MenuPacienteFrame mpf = new MenuPacienteFrame();
         this.dispose();
@@ -222,48 +234,44 @@ public class PerfilPacienteFrm extends javax.swing.JFrame {
         MenuPacienteFrame mpf = new MenuPacienteFrame();
         this.dispose();
         mpf.setVisible(true);
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
-   /*
-    private void obtenerDatos()  {
+    private void mostrarDatosPaciente() {
+        try {
+            // Se asume que en el inicio de sesión se guardó el id del paciente
+            int idUsuario = SesionActual.getIdUsuario();
+
+            // Se obtiene la lista completa de pacientes
+            List<PacienteDTOViejo> pacientes = pacienteBO.obtenerTodosPacientes();
+
+            // Se filtra el paciente cuyo id coincide con el almacenado en sesión.
+            // Es necesario que PacienteDTOViejo tenga un método getId() para identificarlo.
+            PacienteDTOViejo paciente = pacientes.stream()
+                    .filter(p -> p.getIdPaciente() == idUsuario)
+                    .findFirst().orElse(null);
+
+            if (paciente != null) {
+                txtNombre.setText(paciente.getNombre());
+                txtAPellidoPaterno.setText(paciente.getApellidoPaterno());
+                txtApellidoMaterno.setText(paciente.getApellidoMaterno());
+                txtCorreo.setText(paciente.getCorreo());
+                txtCalle.setText(paciente.getCalle());
+                txtNumero.setText(paciente.getNumero());
+                txtColonia.setText(paciente.getColonia());
+                txtTelefono.setText(paciente.getTelefono());
+                datePicker1.setDate(paciente.getFechaNacimiento());
                 
-            txtNombre.setText(paciente.getNombre());
-            txtAPellidoPaterno.setText(paciente.getApellidoPaterno());
-            txtApellidoMaterno.setText(paciente.getApellidoMaterno());
-            txtColonia.setText(paciente.getColonia());
-            txtCalle.setText(paciente.getCalle());
-            txtNumero.setText(paciente.getNumero());
-            datePicker1.setDate(paciente.getFechaNacimiento());
-            txtTelefono.setText(paciente.getTelefono());
-            txtCorreo.setText(paciente.getCorreo());
-        
-    }
-    */
-
-    /*
-    private void GuardarCambios() {
-        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Deseas guardar los cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
-
-        if (confirmacion == JOptionPane.YES_OPTION) {
-            try {
-
-                // Actualizar los datos del objeto PacienteDTO
-                paciente.setNombre(txtNombre.getText());
-                paciente.setApellidoPaterno(txtAPellidoPaterno.getText());
-                paciente.setApellidoMaterno(txtApellidoMaterno.getText());
-                paciente.setColonia(txtColonia.getText());
-                paciente.setCalle(txtCalle.getText());
-                paciente.setNumero(txtNumero.getText());
-                paciente.setFechaNacimiento(datePicker1.getDate());
-                paciente.setTelefono(txtTelefono.getText());
-                paciente.setCorreo(txtCorreo.getText());
-
-            } catch (Exception e) {
-
+            } else {
+                txtNombre.setText("Paciente no encontrado");
             }
+        } catch (NegocioException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-*/
+
     /**
      * @param args the command line arguments
      */
@@ -278,16 +286,24 @@ public class PerfilPacienteFrm extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PerfilPacienteFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerfilPacienteFrm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PerfilPacienteFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerfilPacienteFrm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PerfilPacienteFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerfilPacienteFrm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PerfilPacienteFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PerfilPacienteFrm.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
