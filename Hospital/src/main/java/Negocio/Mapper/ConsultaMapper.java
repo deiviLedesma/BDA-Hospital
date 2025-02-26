@@ -12,6 +12,11 @@ import Persistencia.Entidades.Consulta;
  * @author Ramón Zamudio
  */
 public class ConsultaMapper {
+    /**
+     * metodo que transforma una consulta en constultaDTO
+     * @param consulta conutlta a tranformar 
+     * @return consulta ya transformada
+     */
     public ConsultaDTO toDTO(Consulta consulta) {
         return new ConsultaDTO(
             consulta.getFechaConsulta(),
@@ -20,7 +25,11 @@ public class ConsultaMapper {
             consulta.getCita()
         );
     }
-    
+    /**
+     * metodo que transforma una consultaDTO a consulta
+     * @param consultaDTO consulta a transformar
+     * @return consulta ya transformada
+     */
     public Consulta toEntity(ConsultaDTO consultaDTO) {
         Consulta consulta = new Consulta();
         consulta.setFechaConsulta(consultaDTO.getFechaConsulta());

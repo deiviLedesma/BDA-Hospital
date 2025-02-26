@@ -15,7 +15,11 @@ import java.util.List;
  * @author Ramón Zamudio
  */
 public class MedicoMapper {
-    
+    /**
+     * metodo que transforma un medicoDTO a medico
+     * @param medicoNuevo medico a transformar
+     * @return regresa al medico ya transformado
+     */
     public Medico toEntity(MedicoDTONuevo medicoNuevo){
         if(medicoNuevo == null){
             return null;
@@ -26,7 +30,11 @@ public class MedicoMapper {
                 medicoNuevo.getCeludaProfesional(), 
                 medicoNuevo.getEstado(), medicoNuevo.getContrasenia());
     }
-    
+    /**
+     * metodo que transforma un medicoNuevo a medicodto
+     * @param medico medico a transformar
+     * @return regresa el medicodto transformado
+     */
     public MedicoDTONuevo toNuevoDTO(Medico medico){
         if(medico == null){
             return null;
@@ -37,7 +45,11 @@ public class MedicoMapper {
                 medico.getCeludaProfesional(),
                 medico.getEstado(), medico.getContrasenia());
     }
-    
+    /**
+     * metodo que transforma un medico a medicoViejoDTo
+     * @param medico medico a transformar
+     * @return regresa un medicoViejoDTO 
+     */
     public MedicoDTOViejo toViejoDTO(Medico medico){
        if(medico == null){
             return null;
@@ -48,7 +60,11 @@ public class MedicoMapper {
                 medico.getCeludaProfesional(), 
                 medico.getEstado(), medico.getContrasenia());
     }
-    
+    /**
+     * metodo que transforma una lista de medicos a una lista de medicosViejos
+     * @param listaMedicos lista de medicos a transformar
+     * @return regresa una lista de medicos transformados
+     */
     public List<MedicoDTOViejo> toDTOViejoList(List<Medico> listaMedicos){
         if(listaMedicos == null || listaMedicos.isEmpty()){
             return null;

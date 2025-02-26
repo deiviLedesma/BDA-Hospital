@@ -30,7 +30,12 @@ public class MedicoDAO implements IMedicoDAO{
     }
     private static final Logger LOG = Logger.getLogger(MedicoDAO.class.getName());
     
-   
+    /**
+     * metodo que da de baja al medico 
+     * @param id id del medioco a dar de baja
+     * @return  regresa true si se dio de baja, false en caso contrario
+     * @throws PersistenciaException 
+     */
     @Override
     public boolean eliminarMedico(int id) throws PersistenciaException {
         String consultaSQL = " update medicos set estado =  \"INACTIVO\" where idMedico = ?";
@@ -46,7 +51,10 @@ public class MedicoDAO implements IMedicoDAO{
             }
             throw new PersistenciaException("Error al eliminar activista.", e);        }
     }
-    
+    /**
+     * metodo que regresa una lista con todos los medicos
+     * @return regresa una lista con todos los medicos
+     */
     @Override
     public List<Medico> consultarTodosMedicos(){
         List<Medico> listaMedicos = new ArrayList<>();
@@ -83,7 +91,11 @@ public class MedicoDAO implements IMedicoDAO{
         }
         return listaMedicos;
     }
-    
+    /**
+     * metodo que regresa una lista con los medicos los cuales coinciden con el parametro
+     * @param especialidad especialidad de los medicos a buscar
+     * @return una lista con los medicos
+     */
     @Override
     public List<Medico> consultarPorEspecialidad(String especialidad){
         List<Medico> listaMedicos = new ArrayList<>();
@@ -120,7 +132,12 @@ public class MedicoDAO implements IMedicoDAO{
         }
         return listaMedicos;
     }
-
+    /**
+     * metodo que busca a un medico por su cedula
+     * @param cedula cedula del medico
+     * @return regresa al medico que coincide con la cedula
+     * @throws PersistenciaException 
+     */
     @Override
     public Medico buscarMedicoPorCedula(String cedula) throws PersistenciaException {
         Medico medico = null;
