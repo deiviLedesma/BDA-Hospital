@@ -202,6 +202,7 @@ public class MenuPacienteFrame extends javax.swing.JFrame {
 
     private void btnCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCitasActionPerformed
         CitasPaciente citasPaciente = new CitasPaciente();
+        this.dispose();
         citasPaciente.setVisible(true);
     }//GEN-LAST:event_btnCitasActionPerformed
 

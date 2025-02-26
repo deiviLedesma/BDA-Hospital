@@ -4,12 +4,26 @@
  */
 package Presentacion;
 
+import Negocio.BO.CitaMedicaBO;
+import Negocio.Exception.NegocioException;
+import Negocio.configuracion.DependencyInjector;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author SDavidLedesma
  */
 public class CitasPaciente extends javax.swing.JFrame {
-
+    int idPaciente = SesionActual.getIdUsuario();
+    CitaMedicaBO citaMedicaBO = DependencyInjector.crearCitaMedicaBO();
+    String[] columnas = {"Medico","Especialidad","Tipo","Fecha","Hora","Folio","Estado"};
+    DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
     /**
      * Creates new form CitasPaciente
      */
@@ -64,26 +78,11 @@ public class CitasPaciente extends javax.swing.JFrame {
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Doctor", "Especialidad", "Tipo", "Fecha y Hora", "Folio"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        List<String[]> citasPendientes = obtenerCitasPendientes();
+        jTable1.setModel(modelo);
+        for(String[] cita : citasPendientes) {
+            modelo.addRow(cita);
+        }
         jScrollPane1.setViewportView(jTable1);
 
         btnVolver.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -182,4 +181,24 @@ public class CitasPaciente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    
+    private List<String[]> obtenerCitasPendientes() {
+        try{
+        List<String[]> citas = citaMedicaBO.citasPaciente(idPaciente);
+        
+        return citas.stream()
+                .filter(cita -> "PENDIENTE".equalsIgnoreCase(cita[6])) // 6 = Estado
+                .collect(Collectors.toList());
+        
+        } catch(NegocioException e) {
+            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Advertencia", JOptionPane.WARNING_MESSAGE);
+        } catch (Exception ex) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Error inesperado", ex);
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado. Intente nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return null;
+    }
+    
+    
 }

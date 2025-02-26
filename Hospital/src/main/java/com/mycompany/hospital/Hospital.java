@@ -217,6 +217,16 @@ public class Hospital {
 ////      Ayuda
 //        System.out.println(Arrays.toString(citaMedicaBO.agendarCitaEmergencia("Cardiología")));
 
+////      
+//        List<String[]> citasPaciente = citaMedicaDAO.obtenerCitasPaciente(8);
+//        for (Object[] citas : citasPaciente) {
+//            System.out.println(Arrays.toString(citas));
+//        }
 
+
+//        List<String[]> citas = citaMedicaBO.citasPaciente(8);
+//        for (String[] cita : citas) {
+//            System.out.println(Arrays.toString(cita));
+//        }
     }    
 }

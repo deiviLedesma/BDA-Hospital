@@ -100,6 +100,46 @@ public class CitaMedicaDAO implements ICitaMedicaDAO{
         return horarios;
     }
 
+    @Override
+    public List<String[]> obtenerCitasPaciente(int idPaciente) throws PersistenciaException {
+        List<String[]> citas = new ArrayList<>();
+        String consultaSQL = "{CALL verCitasPaciente(?)}";
+        
+        try (Connection con = this.conexion.crearConexion();
+                CallableStatement cs = con.prepareCall(consultaSQL)) {
+            cs.setInt(1, idPaciente);
+            
+            try (ResultSet rs = cs.executeQuery()) {
+                while (rs.next()) {
+                    
+                    String idCita = rs.getString("idCita");
+                    int programada = rs.getInt("programada");
+                    String tipo;
+                    if(programada == 1){
+                        tipo = "Programada";
+                    }else{
+                        tipo = "Emergencia";
+                    }
+                    String diaSemana = rs.getString("diaSemana");
+                    String hora = rs.getString("hora");
+                    String folio = rs.getString("folio");
+                    String estado = rs.getString("estado");
+                    String especialidad = rs.getString("especialidad");
+                    String medico = rs.getString("medico");
+                    
+                    
+                    citas.add(new String[]{medico,especialidad,tipo,diaSemana,hora,folio,estado});
+                }
+            }
+        }catch (SQLException ex) {
+        LOG.log(Level.SEVERE, "Error al recuperar las citas", ex);
+        throw new PersistenciaException("Error al recuperar las citas", ex);
+        }
+        return citas;
+    }
+    
+    
+
     
     
     

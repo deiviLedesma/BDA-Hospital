@@ -19,4 +19,6 @@ public interface ICitaMedicaDAO {
     
     public  List<Object[]> obtenerHorariosDisponibles (int idMedico, String diaSemana) throws Persistencia.PersistenciaException;
     
+    public List<String[]> obtenerCitasPaciente(int idPaciente) throws Persistencia.PersistenciaException;
+    
 }
